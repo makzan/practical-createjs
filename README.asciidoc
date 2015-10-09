@@ -1,0 +1,20 @@
+= Practical CreateJS
+
+https://leanpub.com/practical-createjs/
+
+A short book about using CreateJS.
+
+== Installation
+
+Install the gems via `bundle install`.
+
+== Building
+
+run `rake` to build book.
+
+run `rake book:build_chapter_html` to build each chapter into HTML file.
+
+== Lincense
+
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Unported License.
+
