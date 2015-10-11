@@ -1,0 +1,66 @@
+= Thanks
+
+Thanks again for reading the book. Hope you enjoy the example projects and learn to build mobile app with the CreateJS library.
+
+If you find any questions, you’re welcome to contact me for any questions.  You can find me at:
+
+- Website: makzan.net
+- Email: mak@makzan.net
+- Twitter: @makzan
+
+Writing book is never easy. I would like to thank my family to support my writings.
+
+Also, great thanks to the following friends who keep giving feedback a during the book writing process.
+
+- Franklin Ng
+
+
+== Change Log
+
+Version: 2015-01-09
+
+The schedule of the book is a weekly release for new chapters. Then it will get edited and done in early 2015. The following is the change log of this book.
+
+
+
+=== Todos
+
+- Add chapter 1b explanation.
+- Add chapter 2 explanation.
+- Split chapter 3 into steps.
+
+
+=== What have done
+
+- 2015-01-09
+	* Added project 4B summary.
+
+- 2015-01-03
+	* Added chapter 4B code example, which draws several different charts based on the same data in chapter 4.
+
+- 2014-12-27
+	* Added chapter 4 code example, which draws a interactive chart based on the user selection.
+
+- 2014-12-13
+	* Added chapter 3 code example, which demonstrated a solar system app with parallax effects.
+	* Updated explanation in previous chapters.
+
+- 2014-12-06
+	* Added chapter 2 code example, which separates code into modules by the modal-view-controller pattern.
+
+- 2014-11-22
+	* Added chapter 1b example, which makes use of the Canvas transition in DOM-based application.
+
+- 2014-11-07
+	* Improved chapter 1 explanation.
+
+- 2014-10-26
+	* Added CreateJS introduction.
+	* Organized the book content with front matters and 2 parts of content.
+	* Added chapter 1 – basic app with animated transitions
+
+- 2014-10-19
+	* Added changes log to the book.
+
+- 2014-10-18
+	* Initial the book with pre-request section.

@@ -1,0 +1,17 @@
+= Preparation
+
+In this part, we setup our environment and get ready for getting our hand dirty to code the example project.
+
+include::prerequest.adoc[]
+
+include::html-and-css.adoc[]
+
+include::javascript.adoc[]
+
+include::coffeescript.adoc[]
+
+include::compiling-coffeescript.adoc[]
+
+include::tools.adoc[]
+
+include::why-createjs.adoc[]

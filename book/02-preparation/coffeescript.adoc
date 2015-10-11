@@ -1,0 +1,23 @@
+== CoffeeScript
+
+CoffeeScript is beauty way to write JavaScript. It provides syntax that makes writing JavaScript application much easier. We will use CoffeeScript in some examples. Please note that CoffeeScript _is_ JavaScript. It is like shorthand of JavaScript. When we write our program, we still think in JavaScript way. So you still need to learn JavaScript well.
+
+- [Official site of CoffeeScript](http://coffeescript.org/)
+
+	The official site contains all the syntax that we need to get started.
+
+- [JS2Coffee converter](http://js2coffee.org)
+
+	At the beginning of learning CoffeeScript, you may find yourself struggling between JS and Coffee. This converter is a handy tool to convert the given script between JavaScript and CoffeeScript.
+
+- [The little book of CoffeeScript](http://arcturo.github.io/library/coffeescript/)
+
+	If you prefer reading book than website, you’ll find this book useful as the reference guide to the CoffeeScript syntax.
+
+- [CoffeeScript Cookbook](http://coffeescriptcookbook.com)
+
+	This cookbook contains lots of practical examples for your daily JS development needs.
+
+- [CoffeeScript Ristretto](https://leanpub.com/coffeescript-ristretto/read)
+
+	This book provides a journey of JavaScript and CoffeeScript development process. The examples in this book demonstrates how we can write code to get the job done at the first step, then fine tuning the code to make it more readable and maintainable.
