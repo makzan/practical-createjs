@@ -13,26 +13,27 @@ namespace :book do
   desc 'build basic book formats'
   task :build => :prebuild do
     puts "Converting to HTML..."
-    `bundle exec asciidoctor -D output css-3d-effects.adoc`
-    puts " -- HTML output at output/css-3d-effects.html"
+    `bundle exec asciidoctor -D output practical-createjs.adoc`
+    puts " -- HTML output at output/practical-createjs.html"
 
     puts "Converting to EPub..."
-    `bundle exec asciidoctor-epub3 -D output css-3d-effects.adoc`
-    puts " -- Epub output at output/css-3d-effects.epub"
+    `bundle exec asciidoctor-epub3 -D output practical-createjs.adoc`
+    puts " -- Epub output at output/practical-createjs.epub"
 
     puts "Converting to Mobi (kf8)..."
-    `bundle exec asciidoctor-epub3 -a ebook-format=kf8 -D output css-3d-effects.adoc`
-    puts " -- Mobi output at output/css-3d-effects.mobi"
+    `bundle exec asciidoctor-epub3 -a ebook-format=kf8 -D output practical-createjs.adoc`
+    puts " -- Mobi output at output/practical-createjs.mobi"
 
     puts "Converting to PDF... (this one takes a while)"
-    `bundle exec asciidoctor-pdf -D output css-3d-effects.adoc 2>/dev/null`
-    puts " -- PDF  output at output/css-3d-effects.pdf"
+    `bundle exec asciidoctor-pdf -D output practical-createjs.adoc 2>/dev/null`
+    puts " -- PDF  output at output/practical-createjs.pdf"
   end
 
   desc 'build each chapter'
   task :build_chapter_html => :prebuild do
     puts "Converting chapters to HTML..."
-    `bundle exec asciidoctor -a linkcss -D output book/*/*.adoc`
+    `bundle exec asciidoctor -D output index.adoc`
+    `bundle exec asciidoctor -a linkcss -D output book/*/0-*.adoc`
     puts " -- HTML output done in output/"
   end
 end
