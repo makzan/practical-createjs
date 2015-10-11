@@ -9,31 +9,35 @@ Mac OS X is preferred to build iOS app. Otherwise, Linux and Windows works well 
 === Required software
 
 - Code editor
-
-	Any text editor works. I recommend Sublime Text if you don’t have a preference.
++
+Any text editor works. I recommend Sublime Text if you don’t have a preference.
 
 - Modern web browsers
-
-	Browsers are needed to test and debug our web app rendering.
++
+Browsers are needed to test and debug our web app rendering.
 
 - Android and iOS Simulator
++
+We need simulator to test how our web apps run in mobile operating system. We’ll use [Genymotion](http://www.genymotion.com) or official simulator for Android. We need Mac OS X and Xcode for the iOS simulator.
 
-	We need simulator to test how our web apps run in mobile operating system. We’ll use [Genymotion](http://www.genymotion.com) or official simulator for Android. We need Mac OS X and Xcode for the iOS simulator.
-
-A\> Actually I always recommend testing our web apps in real devices. We can feel our own interface by holding it on hand. Is the button placement easy for tap? Is the font size suitable? How is the performance of the app running in aged devices? These are the questions that only real devices testing can answer.
+NOTE: Actually I always recommend testing our web apps in real devices. We can feel our own interface by holding it on hand. Is the button placement easy for tap? Is the font size suitable? How is the performance of the app running in aged devices? These are the questions that only real devices testing can answer.
 
 === Optional
 
 - Adobe Flash
-	We will create some vector animations in Adobe Flash. CreateJS library integrates with the flash IDE so that we can export the timeline animation directly into the canvas. This is optional because the course code contains the exported animation we need. But if you want to change the animation, you may need Flash IDE to modify the source `.fla` file.
++
+We will create some vector animations in Adobe Flash. CreateJS library integrates with the flash IDE so that we can export the timeline animation directly into the canvas. This is optional because the course code contains the exported animation we need. But if you want to change the animation, you may need Flash IDE to modify the source `.fla` file.
 
-I\> === What version of Adobe Flash supported?
-I\> The exporting tool exists as a plugin in Adobe CS6. In CC 17.0, the tool appears as a command. In CC 17.1. The CreateJS toolkit is deeply integrated into the application.
-I\> There are a new kind of `.fla` document called _Canvas Fla_. For any existing old fla project, we can simply convert the fla file to the new format by using the `Command > Convert a normal fla to canvas fla`.
+=== What version of Adobe Flash supported?
 
-A\> It’s always worth backing up the file before huge changes, such as format convertion.
+The exporting tool exists as a plugin in Adobe CS6. In CC 17.0, the tool appears as a command. In CC 17.1. The CreateJS toolkit is deeply integrated into the application.
+
+There are a new kind of `.fla` document called _Canvas Fla_. For any existing old fla project, we can simply convert the fla file to the new format by using the `Command > Convert a normal fla to canvas fla`.
+
+It’s always worth backing up the file before huge changes, such as format convertion.
 
 - PhoneGap build service
-	We need to pack the web pages and asset files into binary application in order to deploy it on app stores. PhoneGap is one of the solutions. The setup, however, may not be easy enough for web designer. PhoneGap Build provides a web service that lets us upload the client-side code and files. Then it builds the binary applications for different platforms without us handling the compilation environment.
++
+We need to pack the web pages and asset files into binary application in order to deploy it on app stores. PhoneGap is one of the solutions. The setup, however, may not be easy enough for web designer. PhoneGap Build provides a web service that lets us upload the client-side code and files. Then it builds the binary applications for different platforms without us handling the compilation environment.
 
-A\> PhoneGap displays the web app inside a web view and use a native wrapper to build it as binary app. PhoneGap provides more than just a web view. It has many native API access exposed to the JavaScript scope.
+NOTE: PhoneGap displays the web app inside a web view and use a native wrapper to build it as binary app. PhoneGap provides more than just a web view. It has many native API access exposed to the JavaScript scope.

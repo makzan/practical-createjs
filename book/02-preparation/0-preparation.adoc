@@ -15,3 +15,5 @@ include::compiling-coffeescript.adoc[]
 include::tools.adoc[]
 
 include::why-createjs.adoc[]
+
+include::example-projects.adoc[]

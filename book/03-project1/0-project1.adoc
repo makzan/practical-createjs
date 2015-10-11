@@ -1,0 +1,877 @@
+= Project 1—Basic app with animated transitions
+
+In this project, we are going to build a designer portfolio. There is stylish navigation menu, animated transitions and static photos viewer.
+
+![Screenshot of the app example](images/project-1-screenshot.png)
+
+I have recorded a video of the app example that shows the animated transition. You may take a look to have a better understandings on what we are building.
+
+[http://mak.la/cjs-demo1](https://vimeo.com/109947581)
+
+
+== Mission Checklist
+
+We are going to build the portfolio project by following these tasks.
+
+1. Setting up the project and GulpJS.
+2. Setting up the canvas and CreateJS library.
+3. Defining scene as container inheritance.
+4. Adding static stylish menu.
+5. Displaying another scene after menu selection.
+6. Animating transition between scenes.
+7. Optimizing the rendering for retina display.
+
+== Project Preparation
+
+Throughout the project, we need several graphic files to complete the project. Please download the files via the following link.
+
+{line-numbers=off}
+	http://mak.la/cjs-proj1.zip
+
+After you downloaded the file, you will see the following files in the bundle.
+
+![PNG files for project 1](images/project-1-assets.png)
+
+{line-numbers=off}
+	images/
+	images/header.png
+	...
+	scripts/transitions.js
+	graphics_src/transitions.fla
+
+The `transitions.js` file is the animated transition exported from the Adobe Flash. If you don’t have the Adobe Flash, you can just use this file who comes with 2 transitions to follow the example. If you have Flash, however, you can open the `transitions.fla` file and customize the transition animation. You may even create new transition effects. We will talk about this later.
+
+== 1. Setting up the project and GulpJS
+
+In this step, we prepare the compiling environment for our project.
+
+=== Preparation
+
+Make sure we have _nodejs_ and _npm_ installed. `npm` is the package modules manager for nodejs. It’s included inside nodejs installer package.
+
+=== Time for Action—Setting up the project folder
+
+In this steps, we will initial our project with the GulpJS compiling automation setup.
+
+1. First, let’s create a folder for all the files in this project. The following is the initial file structure setup.
+
+	{line-numbers=off}
+	\<\<(code/code-1.1.1.txt)
+
+2. We can generate the `package.json` file via the `npm init` method. After we go through the `npm init` process, we can then install the plugins via the following shell command.
+
+	{line-numbers=off}
+		$ npm install --save-dev gulp coffee-script gulp-coffee gulp-concat
+
+3. After step 2, node.js should have written the following content into the `package.json` file. Check if you get similar result.
+
+	{title="package.json"}
+	\<\<(code/code-1.1.package.json)
+
+4. Gulp always looks for the `Gulpfile.js` file when we execute the gulp tasks. If we want to write the Gulp tasks in CoffeeScript syntax, we need to load the CoffeeScript compiler in the `Gulpfile.js` and include the `.coffee` version of the GulpFile.
+
+	{title="gulp.js"}
+	\<\<(code/code-1.1.gulp.js)
+
+5. Now we can write our Gulp pipeline in CoffeeScript. The following configuration defines how the compiler should compile our source files. It also defined a `watch` task that watch any changes of `.coffee` file and go through the `js` task automatically.
+
+	{title="gulp.coffee"}
+	\<\<(code/code-1.1.gulp.coffee)
+
+6. We create 2 CoffeeScript files to see if our `Gulpfile` works. They are `app.coffee` and `setting.coffee`. We will add real code logic into these files in next step.
+
+	{title="app.coffee"}
+	\<\<(code/code-1.1.app.coffee)
+
+	{title="setting.coffee"}
+	\<\<(code/code-1.1.setting.coffee)
+
+7. Now we can run `gulp` in the terminal:
+
+		$ ./node_modules/.bin/gulp
+
+8. We should see an `app.js` file is generated with the following content.
+
+	{title="app.js"}
+	\<\<(code/code-1.1.app.js)
+
+If you get the same result, that means our setup works.
+
+=== What just happened?
+
+We just set up the assets compiling tool chain. After setting up the building streamline, we are ready to dig into the early project development in next task.
+
+=== Init a Node.js project with package.json
+
+The development environment uses Node.js, although the project is for web browser. We need to setup the project folder with an npm—Node.js Package Manager. We can execute `npm init` and following the steps to generate a `package.json` file in the project directory.
+
+After created the `package.json` file, we called the `npm install`.
+
+	$ npm install --save-dev gulp coffee-script gulp-coffee gulp-concat
+
+The command installs the required package to compile our source code into JavaScript file. We used `--save-dev` which records the provided Node.js package as dependency libraries inside the `package.json`.
+
+I\> If you’re working on a project with `package.json` file exists, you can use `npm install` to install node modules based on the existing `package.json` configuration. This happens when you clone a project from an external code repository.
+
+
+
+
+
+
+
+== 2. Setting up the canvas and CreateJS library
+
+In this step, we setup the canvas and the CreateJS for the project.
+
+=== Preparation
+
+We need the CreateJS library. The easiest way to include the CreateJS is via the distribution of content delivery network.
+
+{line-numbers=off}
+	http://code.createjs.com/
+
+Optionally, we can download the code from the CreateJS github repository and host the files ourselves.
+
+{line-numbers=off}
+	https://github.com/createjs
+
+
+### Time for Action—Setting up the Canvas and CreateJS Stage
+
+Let’s follow the following steps to setup our canvas and CreateJS library.
+
+1. In the `index.html`, we prepare the basic HTML structure.
+
+	{title="index.html"}
+	\<\<(code/code-1.2.index.html)
+
+2. We have minimal styling in this task because our focus is on the canvas element. Add the following CSS to the `styles/app.css` file.
+
+	{title="styles/app.css"}
+	\<\<(code/code-1.2.app.css)
+
+3. We created a file named `setting.coffee` which holds our global app configuration variables. Add the following width and height setting to the file.
+
+	{title="setting.coffee"}
+	\<\<(code/code-1.2.setting.coffee)
+
+4. Then we create the entry point of our app in the `app.coffee`. Add the following code to the file.
+
+	{title="app.coffee"}
+	\<\<(code/code-1.2.app.coffee)
+
+5. We have created the app’s foundation. Although we don’t see any content yet, the app foundation is ready and we can add our scene to the app in next step.
+
+### What just happened?
+
+We just created the basic canvas app and CreateJS setup. In next step, we’ll build our scene. Let’s take a look at each part of code in this step.
+
+#### Viewport
+
+{line-numbers=off}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+We target the app to be a mobile application. So we need to set a viewport. Mobile web browser simulate the device width as a desktop monitor to provide a better viewing experience for most desktop-only website. Viewport lets web designer tells the mobile browser the display configurations we want.
+
+The default viewport of mobile web browser is about 980px. If we have created the styles dedicated to narrow screen, such as 320px width, we should change the viewport width to reflect the real device width.
+
+I\> If you want to provide an app like experience where users cannot zoom the view, you may consider adding the `minimum-scale` and `maximum-scale` value to the viewport. In contrasts, adding these two constants to web site will harm the user experience because website readers expect they can pinch to zoom any web pages.
+
+#### Web app capable
+
+{line-numbers=off}
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+We want to provide an app experience to the user. When user add the web app into home screen, normal web pages act as bookmark. Tapping on them launch the mobile safari. After we set the `apple-mobile-web-app-capable`, the home screen bookmark acts like a real app. It has its own we view without the Safari user interface. It also has its own app switching screen in the multitask screen when user clicked the home button twice.
+
+
+
+#### Default value when variable is undefined
+
+{line-numbers=off}
+	this.exampleApp ?= {}
+
+The equivalent way in JavaScript is:
+
+{line-numbers=off}
+	if (this.exampleApp == null) this.exampleApp = {}
+
+We can also express the same meaning with the following line, which looks cleaner.
+
+{line-numbers=off}
+	this.exampleApp = this.exampleApp || {}
+
+#### Centering the canvas
+
+I\> I will update this section to use Flexbox for center alignment.
+
+The canvas has fixed dimension. We can use the following styles to center aligning the canvas at the middle of the page.
+
+	#app > canvas {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  height: 400px;
+	  width: 300px;
+	  margin-top: -200px;
+	  margin-left: -150px;
+	}
+
+The code is inspired from the following CSS-Tricks website which shares different styling approaches to center elements.
+
+{line-numbers=off}
+	http://css-tricks.com/centering-css-complete-guide/
+
+### Class definition in CoffeeScript
+
+The `class` in CoffeeScript allows us to define a class definition and then we can create instance via the `new` method.
+
+	class App
+	  # Entry point.
+	  constructor: ->
+
+	# Start the app
+	new App()
+
+
+
+Let’s take a look at the JavaScript from the CoffeeScript generator.
+
+	var App;
+
+	App = (function() {
+	  function App() {}
+
+	  return App;
+
+	})();
+
+	new App();
+
+
+
+
+## 3. Defining scene as container inheritance
+In this step, we define the Scene class which every page view builds on top of it.
+
+### Time for Action—Defining the Scene class
+Let’s follow the steps to define a `Scene` class.
+
+1. We create a dedicated file for the scenes definition. Add the following code to the `scenes.coffee`.
+
+	{title="scenes.coffee"}
+		# a global app object.
+		this.exampleApp ?= {}
+
+		# alias
+		cjs = createjs
+		setting = this.exampleApp.setting
+
+		class Scene extends cjs.Container
+		  constructor: (bgColor='blue')->
+		    # CreateJS super constructor
+		    @initialize()
+
+		    # Draw a shape as the background color
+		    if bgColor != undefined
+		      shape = new cjs.Shape()
+		      shape.graphics
+		        .beginFill bgColor
+		        .drawRect 0, 0, setting.width, setting.height
+
+		      # Add the shape to the display list, via using addChild
+		      @addChild shape
+
+		# export to global app scope
+		this.exampleApp.Scene = Scene
+
+2. In the `app.coffee`, we create the Scene instance and add it to the stage. This is a testing scene, we are going to change it to the real scene in next step.
+	{title="app.coffee"}
+		Scene = this.exampleApp.Scene
+
+		class App
+		  constructor: ->
+		    ...
+		    leanpub-start-insert
+		    # Temporary testing scene
+		    testScene = new Scene('gold')
+		    @stage.addChild testScene
+		    leanpub-end-insert
+
+3. We have created a new file `scenes.coffee`, we need to include it into the GulpJS pipeline. Add the file into the `gulp.src` array.
+
+	{title="Gulpfile.coffee"}
+		gulp.task 'js', ->
+		  gulp.src [
+		    './app/scripts/setting.coffee'
+		    leanpub-start-insert
+		    './app/scripts/scenes.coffee'
+		    leanpub-end-insert
+		    './app/scripts/app.coffee'
+		  ]
+		  .pipe coffee()
+		  .pipe concat 'app.js'
+		  .pipe gulp.dest './app/scripts/'
+
+### What just happened?
+
+We have defined a `Scene` class and added a testing scene object to the stage.
+
+#### Vector shape drawing
+
+A shape is vector graphic that we express in mathematics. It’s like giving instruction on what the shape should look like.
+
+	shape = new cjs.Shape()
+	shape.graphics
+	  .beginFill "white"
+	  .drawRect 0, 0, 100, 50
+
+A\> If you need to draw complex shapes that are difficult to express in code, you may consider drawing the shapes in Adobe Flash and export it to JavaScript to use.
+
+For every created display object, we need to add it to the display list. The following code assumes that we are adding the shape to a container.
+
+{line-numbers=off}
+	@addChild shape
+
+If we are adding the shape to the stage, we can call the `stage.addChild` because the `stage` is a container.
+
+### Class inheritance in CoffeeScript
+
+The CoffeeScript inheritance took us 3 lines to inherit class.
+
+	class Scene extends cjs.Container
+	  constructor: (bgColor='blue')->
+	    @initialize()
+
+In the generated code. It would take 13 lines of code in JavaScript, not including the `_extends` helper function.
+
+	var Scene,
+	  __hasProp = {}.hasOwnProperty,
+	  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+	Scene = (function(_super) {
+	  __extends(Scene, _super);
+
+	  function Scene(bgColor) {
+	    if (bgColor == null) {
+	      bgColor = 'blue';
+	    }
+	    this.initialize();
+	  }
+
+	  return Scene;
+
+	})(cjs.Container);
+
+
+
+Actually, all the CreateJS follows its own way to create the object inheritance structure. The following source code of the `Shape` class shows  how CreateJS inherits.
+
+{title="Shape.js, from CreateJS"}
+	(function() {
+	  "use strict";
+
+	  var Shape = function(graphics) {
+	    this.initialize(graphics);
+	  };
+	  var p = Shape.prototype = new createjs.DisplayObject();
+	  Shape.prototype.constructor = Shape;
+
+	  // public properties:
+
+	    p.graphics = null;
+
+	  // constructor:
+
+	    p.DisplayObject_initialize = p.initialize;
+
+	    p.initialize = function(graphics) {
+	      this.DisplayObject_initialize();
+	      this.graphics = graphics ? graphics : new createjs.Graphics();
+	    };
+
+
+	    p.isVisible = function() {
+	      ...
+	    };
+
+
+	    p.DisplayObject_draw = p.draw;
+
+
+	    p.draw = function(ctx, ignoreCache) {
+	      ...
+	    };
+
+
+	    p.clone = function(recursive) {
+	      ...
+	    };
+
+	    p.toString = function() {
+	      ...
+	    };
+
+	  createjs.Shape = Shape;
+	}());
+
+### Exporting the class definition
+
+We separate each part of code into its own file. The benefit of having separated files is that we can modularity logic into very specific domain. For every specific module, we only focus on its own logic. This helps making each parts less bugs.
+
+It is a good practice that each file is separated. The compiled JavaScript of each files are put into an isolated function group by default. If we need to expose specific variables to other files, we can reference them to the global object under the app namespace.
+
+{line-numbers=off}
+	this.exampleApp.Scene = Scene
+
+Then we can reference the exported Class in another file.
+
+{line-numbers=off}
+	Scene = this.exampleApp.Scene
+
+
+
+## 4. Adding static stylish menu
+
+In this step, we implement the menu scene and put menu item on it.
+
+
+
+### Time for Action
+
+Let’s follow the steps to create the menu scene.
+
+1. We create the our menu scene. Let’s add the code to `scenes.coffee`.
+
+	{title="scenes.coffee"}
+		class SceneA extends Scene
+		  constructor: ->
+		    super('#EDE4D1')
+
+		    header = new cjs.Bitmap 'images/header.png'
+		    header.scaleX = header.scaleY = 0.5
+		    @addChild header
+
+		    info = new cjs.Bitmap 'images/info.png'
+		    info.y = 356
+		    info.scaleX = info.scaleY = 0.5
+		    @addChild info
+
+		    photoA = new cjs.Bitmap 'images/a.png'
+		    photoA.y = 38
+		    photoA.scaleX = photoA.scaleY = 0.5
+		    @addChild photoA
+
+		    photoB = new cjs.Bitmap 'images/b.png'
+		    photoB.y = 146
+		    photoB.scaleX = photoB.scaleY = 0.5
+		    @addChild photoB
+
+		    photoC = new cjs.Bitmap 'images/c.png'
+		    photoC.y = 253
+		    photoC.scaleX = photoC.scaleY = 0.5
+		    @addChild photoC
+
+		# export to global app scope
+		this.exampleApp.SceneA = SceneA
+
+
+2. Make sure we import any newly created class into our App scope in order to use them.
+
+	{title="app.coffee"}
+		# alias
+		cjs = createjs
+		setting = this.exampleApp.setting
+		leanpub-start-delete
+		Scene = this.exampleApp.Scene
+		leanpub-end-delete
+		leanpub-start-insert
+		SceneA = this.exampleApp.SceneA
+		leanpub-end-insert
+
+
+3. In the app logic, we replace the old `Scene` by the newly created `SceneA` class.
+
+	{title="app.coffee"}
+		class App
+		  constructor: ->
+		    ...
+		    sceneA = new SceneA()
+		    @stage.addChild sceneA
+
+### What just happened?
+
+We created a new scene by inheriting the original `Scene` class definition. The inheritance allows us to define custom scene easily.
+
+## 5. Displaying another scene after menu selection
+
+In this step, we build a simple scene manager to control the presence of different scenes.
+
+### Preparation
+
+Our scene management is inspired from the navigation controller in iOS. The navigation controller stores a stack of added scene. Developers that use this manager can push and pop scenes.
+
+### Time for Action
+
+Let’s follow the steps to create our own scene manager for the app.
+
+1. We have more than 1 scene in our app. To make things easier, we design a scene manager that manage the scene displaying and leaving. we create a new file named `scene-management.coffee` for this logic. Then put the following code into the newly created file.
+
+	{title="scene-management.coffee"}
+		# a global app object.
+		this.exampleApp ?= {}
+
+		# An object to manage scene, under the app namespace.
+		this.exampleApp.sceneManager = {
+		  stage: undefined
+		  scenes: []
+		  lastScene: -> @scenes[@scenes.length-1]
+		  resetWithScene: (scene) ->
+		    @scenes.length = 0
+		    @scenes.push scene
+		    @stage.addChild scene
+		  popScene: ->
+		    @stage.removeChild @lastScene()
+		    @scenes.pop()
+		    @lastScene().mouseEnabled = true
+		  pushScene: (scene)->
+		    @lastScene().mouseEnabled = false
+		    @scenes.push scene
+		    @stage.addChild scene
+		}
+
+2. We create more scenes to test our example. Add the `SceneB` to the `scenes.coffee`.
+
+	{title="scenes.coffee"}
+		class SceneB extends Scene
+		  constructor: (contentId='a')->
+		    super('white')
+
+		    content = new cjs.Bitmap "images/page-view-content-#{contentId}.png"
+		    content.scaleX = content.scaleY = 0.5
+		    @addChild content
+
+		    header = new cjs.Bitmap 'images/header-back.png'
+		    header.scaleX = header.scaleY = 0.5
+		    @addChild header
+
+		    header.on 'click', ->
+		      sceneManager.popScene()
+
+3. Then we create the `SceneInfo`.
+
+	{title="scenes.coffee"}
+		class SceneInfo extends Scene
+		  constructor: ->
+		    super('white')
+
+		    content = new cjs.Bitmap "images/info-content.png"
+		    content.scaleX = content.scaleY = 0.5
+		    @addChild content
+
+		    @on 'click', ->
+		      sceneManager.popScene()
+
+4. Make sure we export the newly defined class so that the `App`, which is in another file, can access to these classes.
+
+	{title="app.coffee"}
+		# export to global app scope
+		this.exampleApp.SceneA = SceneA
+		this.exampleApp.SceneB = SceneB
+		this.exampleApp.SceneInfo = SceneInfo
+
+
+5. In the `scenes.coffee` file, we add the click event handling to the menu elements. Tapping the elements will lead to a new scene to display the image or the information scene.
+
+	{title="scenes.coffee"}
+		sceneManager = this.exampleApp.sceneManager
+
+		info = new cjs.Bitmap 'images/info.png'
+		info.y = 356
+		info.scaleX = info.scaleY = 0.5
+		@addChild info
+		leanpub-start-insert
+		info.on 'click', ->
+		  scene = new SceneInfo()
+		  sceneManager.pushScene scene
+		leanpub-end-insert
+
+		# Menu item 1
+		photoA = new cjs.Bitmap 'images/a.png'
+		photoA.y = 38
+		photoA.scaleX = photoA.scaleY = 0.5
+		@addChild photoA
+		leanpub-start-insert
+		photoA.on 'click', ->
+		  scene = new SceneB('a')
+		  sceneManager.pushScene scene
+		leanpub-end-insert
+
+		# Menu item 2
+		photoB = new cjs.Bitmap 'images/b.png'
+		photoB.y = 146
+		photoB.scaleX = photoB.scaleY = 0.5
+		@addChild photoB
+		leanpub-start-insert
+		photoB.on 'click', ->
+		  scene = new SceneB('b')
+		  sceneManager.pushScene scene
+		leanpub-end-insert
+
+		# Menu item 3
+		photoC = new cjs.Bitmap 'images/c.png'
+		photoC.y = 253
+		photoC.scaleX = photoC.scaleY = 0.5
+		@addChild photoC
+		leanpub-start-insert
+		photoC.on 'click', ->
+		  scene = new SceneB('c')
+		  sceneManager.pushScene scene
+		leanpub-end-insert
+
+6. We have created a few new scenes. Make sure we have aliased these new classes in the `app.coffee` file.
+
+	{title="app.coffee"}
+		# alias
+		cjs = createjs
+		setting = this.exampleApp.setting
+		leanpub-start-insert
+		sceneManager = this.exampleApp.sceneManager
+		leanpub-end-insert
+		SceneA = this.exampleApp.SceneA
+		leanpub-start-insert
+		SceneB = this.exampleApp.SceneB
+		SceneInfo = this.exampleApp.SceneInfo
+		leanpub-end-insert
+
+7. In the main `App` logic, We removed the old Scene creation logic and make use of the `sceneManager` to handle the scene visualization.
+
+	{title="app.coffee"}
+		class App
+		  constructor: ->
+		    ...
+
+		    leanpub-start-delete
+		    sceneA = new SceneA()
+		    @stage.addChild sceneA
+		    leanpub-end-delete
+
+		    sceneManager.stage = @stage
+
+		    scene = new SceneA()
+		    sceneManager.resetWithScene scene
+
+8. We created new files so we need to include the files in the Gulpfile compiling pipeline.
+
+	{title="Gulpfile.coffee"}
+		gulp.task 'js', ->
+		  gulp.src [
+		    './app/scripts/setting.coffee'
+		    leanpub-start-insert
+		    './app/scripts/scene-manager.coffee'
+		    leanpub-end-insert
+		    './app/scripts/scenes.coffee'
+		    './app/scripts/app.coffee'
+		  ]
+		  .pipe coffee()
+		  .pipe concat 'app.js'
+		  .pipe gulp.dest './app/scripts/'
+
+### What just happened?
+
+The scene manager is an object without class definition. We put it on the `exampleApp` namespace to let other modules access it.
+
+There are 2 properties, `stage` and `scenes`. The `stage` is refer to the target container that holds the scenes. The `scenes` is an array of the scenes we have added to the stage.
+
+Then we defined 3 essential methods, `resetScene`, `pushScene` and `popScene`, and 1 helper method, `lastScene`.
+
+The `resetWithScene` clears the scenes array to provide a clean state. Then it add the give scene as the first scene, as known as root scene in such kind of navigation pattern.
+
+The `pushScene` takes the given new scene object and add to the scenes stack. Then it displays the new added scene to the screen.
+
+The `popScene`, on the other hand, remove the last scene from the screen and from the scenes stack. That’s why we have a helper method that returns the last scene.
+
+
+## 6. Animating transition between scenes
+
+In this step, we make use of the exported Flash animation to build the animated transition effect.
+
+### Preparation
+
+Before we begin, make sure we have the `transitions.js` file ready in the `scripts` folder. We include the file into the `index.html` before loading our main App logic.
+
+{title="index.html"}
+	...
+	  <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
+	  <script src="http://code.createjs.com/tweenjs-0.5.1.min.js"></script>
+	  <script src="http://code.createjs.com/movieclip-0.7.1.min.js"></script>
+	  leanpub-start-insert
+	  <script src="scripts/transitions.js"></script>
+	  leanpub-end-insert
+	  <script src="scripts/app.js"></script>
+	</body>
+
+I\> If you have modified the animation in Flash, you need to publish the Flash document again to update the JavaScript file.
+
+### Time for Action
+
+Let’s work on the following steps to add the animated transition to the app.
+
+1. In the `scene-manager.coffee`, we add one new method `pushSceneWithTransition` which add the animated transition while switching scenes.
+
+	{title="scene-manager.coffee"}
+		this.exampleApp.sceneManager = {
+		  ...
+		  pushSceneWithTransition: (scene, transitionClassName) ->
+		    transition = new lib[transitionClassName]()
+		    transition.x = setting.width/2
+		    transition.y = setting.height/2
+
+		    scene.visible = false
+
+		    @pushScene scene
+
+		    # The transition animation in Flash should dispatch `sceneShouldChange` event.
+		    transition.on 'sceneShouldChange', ->
+		      scene.visible = true
+
+		    @stage.addChild transition
+		}
+
+2. In the `scenes.coffee`, we change to use the new `pushSceneWithTransition` method.
+
+	{title="scenes.coffee"}
+		class SceneA extends Scene
+		  constructor: ->
+
+		...
+		info.on 'click', ->
+		  scene = new SceneInfo()
+		  leanpub-start-insert
+		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationA'
+		  leanpub-end-insert
+
+		...
+		photoA.on 'click', ->
+		  scene = new SceneB('a')
+		  leanpub-start-insert
+		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
+		  leanpub-end-insert
+
+		...
+		photoB.on 'click', ->
+		  scene = new SceneB('b')
+		  leanpub-start-insert
+		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
+		  leanpub-end-insert
+
+		...
+		photoC.on 'click', ->
+		  scene = new SceneB('c')
+		  leanpub-start-insert
+		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
+		  leanpub-end-insert
+
+
+### What just happened?
+
+We have added a custom animated transition when we switch scene in the app.
+
+#### Adding the generated transition
+
+Any exported Flash movieclip is put into a `lib` namespace. For example, if the movieclip name is `AnimatedBall`, we can create an instance by using `new lib.AnimatedBall()`.
+
+In our code, the transition class name is a variable. By using the array notation instead of dot notation, we can create new instance of a class where the class name is variable.
+
+{line-numbers=off}
+	new lib[transitionClassName]()
+
+#### Custom event: sceneShouldChange
+
+In the scene manager, we listen to the `sceneShouldChange` event and toggle the new scene’s visibility.
+
+	transition.on 'sceneShouldChange', ->
+	  scene.visible = true
+
+This relies on the Flash animation which dispatches the event at the middle of the transition animation.
+
+![sceneShouldChange event in the Flash timeline](images/project-1-scene-should-change.png)
+
+In the screenshot, you will find an action is defined in the middle of the transition animation. When the animation reaches this frame, it dispatch the event. We capture this custom event in the scene manager to actually switch the scene.
+
+
+## 7. Optimizing for retina display
+
+We may find the app looks blurry when we test the web app in iPhone or Android device with high-definition display. That’s because the retina display trys to render the graphics by doubling our pixels. In this step, we optimize the canvas rendering in retina display.
+
+### Time for Action
+
+Let’s add the `retinalize` utility via the following steps.
+
+1. The `retinalize` method is kind of utility that’s independent to our logic. We create a new file `utility.coffee` and place the following code inside it.
+
+	{title="utility.coffee", lang=coffeescript}
+		retinalize = (canvas, stage) ->
+		  # We skip the logic if the device is not retina
+		  # or it doesn’t support the pixel ratio
+		  return if (window.devicePixelRatio)
+
+		  # cache the pixel ratio
+		  ratio = window.devicePixelRatio
+		  # get the original canvas dimension
+		  height = canvas.getAttribute('height')
+		  width = canvas.getAttribute('width')
+
+		  # set the new dimension with ratio multiplication
+		  canvas.setAttribute('width', Math.round(width * ratio))
+		  canvas.setAttribute('height', Math.round( height * ratio))
+
+		  # ensure the canvas CSS style follows the original dimension
+		  canvas.style.width = width+"px"
+		  canvas.style.height = height+"px"
+
+		  # scale the entire stage so we can use the original coordinate in our app.
+		  stage.scaleX = stage.scaleY = ratio
+
+2. We can then call the retinalize method after we initialize the canvas and stage variable.
+
+	{title="app.coffee"}
+	    class App
+		  # Entry point.
+		  constructor: ->
+		    console.log "Welcome to my portfolio."
+		    @canvas = document.getElementById("app-canvas")
+		    @stage = new cjs.Stage(@canvas)
+
+		    window.utility.retinalize(@canvas, @stage)
+
+3. We have created a new file. As usual, we include the new file in our compiling pipeline. Add the following highlighted line to the `Gulpfile.coffee`.
+
+	{title="Gulpfile.coffee"}
+		gulp.task 'js', ->
+		  gulp.src [
+		    './app/scripts/setting.coffee'
+		    leanpub-start-insert
+		    './app/scripts/retinalize.coffee'
+		    leanpub-end-insert
+		    './app/scripts/scene-manager.coffee'
+		    './app/scripts/scenes.coffee'
+		    './app/scripts/app.coffee'
+		  ]
+		  .pipe coffee()
+		  .pipe concat 'app.js'
+		  .pipe gulp.dest './app/scripts/'
+
+### What just happened?
+
+When the browser detects the display has a higher devicePixelRatio, which means for every ‘point’ of the display, it renders more than 1 pixels. For such types of display, we enlarge the canvas content while keeping the dimension of the  `<canvas>` element unchanged. This allows the retina display to render the graphics in its native pixel resolution, and hence make the canvas graphics looks sharp.
+
+I\> It’s worth noting that the retina display not only applies to mobile device but also desktops, such as Mackbook Pro Retina and the 5K retina iMac.
+
+
+
+## Further challenges
+
+There are some essential features we haven’t implemented in the example app.
+
+For example, we don’t have scrolling in the menu scene so we can’t display more photos.
