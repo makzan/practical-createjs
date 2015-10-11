@@ -1,0 +1,8 @@
+{
+  "name": "practical-createjs-surge",
+  "version": "1.0.0",
+  "description": "Practical CreateJS",
+  "devDependencies": {
+    "surge": "^0.15.0"
+  }
+}
