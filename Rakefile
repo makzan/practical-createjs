@@ -2,11 +2,21 @@ namespace :book do
   desc 'prepare build'
   task :prebuild do
     Dir.mkdir 'output' unless Dir.exists? 'output'
+
+    # Image folder
     Dir.mkdir 'output/images' unless Dir.exists? 'output/images'
     Dir.mkdir 'images' unless Dir.exists? 'images'
     Dir.glob("book/*/images/*").each do |image|
       FileUtils.copy(image, "output/images/" + File.basename(image))
       FileUtils.copy(image, "images/" + File.basename(image))
+    end
+
+    # Code folder
+    Dir.mkdir 'output/code' unless Dir.exists? 'output/code'
+    Dir.mkdir 'code' unless Dir.exists? 'code'
+    Dir.glob("book/*/code/*").each do |codeFile|
+      FileUtils.copy(codeFile, "output/code/" + File.basename(codeFile))
+      FileUtils.copy(codeFile, "code/" + File.basename(codeFile))
     end
 
     # Copy anything in public

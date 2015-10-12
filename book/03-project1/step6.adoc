@@ -2,11 +2,13 @@
 
 In this step, we make use of the exported Flash animation to build the animated transition effect.
 
-### Preparation
+=== Preparation
 
 Before we begin, make sure we have the `transitions.js` file ready in the `scripts` folder. We include the file into the `index.html` before loading our main App logic.
 
-{title="index.html"}
+.index.html
+[source,html]
+----
 	...
 	  <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
 	  <script src="http://code.createjs.com/tweenjs-0.5.1.min.js"></script>
@@ -16,91 +18,94 @@ Before we begin, make sure we have the `transitions.js` file ready in the `scrip
 	  leanpub-end-insert
 	  <script src="scripts/app.js"></script>
 	</body>
+----
 
-I\> If you have modified the animation in Flash, you need to publish the Flash document again to update the JavaScript file.
+NOTE: If you have modified the animation in Flash, you need to publish the Flash document again to update the JavaScript file.
 
-### Time for Action
+=== Time for Action
 
 Let’s work on the following steps to add the animated transition to the app.
 
 1. In the `scene-manager.coffee`, we add one new method `pushSceneWithTransition` which add the animated transition while switching scenes.
 
-	{title="scene-manager.coffee"}
-		this.exampleApp.sceneManager = {
-		  ...
-		  pushSceneWithTransition: (scene, transitionClassName) ->
-		    transition = new lib[transitionClassName]()
-		    transition.x = setting.width/2
-		    transition.y = setting.height/2
+.scene-manager.coffee
+[source,coffeescript]
+----
+this.exampleApp.sceneManager = {
+  ...
+  pushSceneWithTransition: (scene, transitionClassName) ->
+    transition = new lib[transitionClassName]()
+    transition.x = setting.width/2
+    transition.y = setting.height/2
 
-		    scene.visible = false
+    scene.visible = false
 
-		    @pushScene scene
+    @pushScene scene
 
-		    # The transition animation in Flash should dispatch `sceneShouldChange` event.
-		    transition.on 'sceneShouldChange', ->
-		      scene.visible = true
+    # The transition animation in Flash should dispatch `sceneShouldChange` event.
+    transition.on 'sceneShouldChange', ->
+      scene.visible = true
 
-		    @stage.addChild transition
-		}
+    @stage.addChild transition
+}
+----
 
 2. In the `scenes.coffee`, we change to use the new `pushSceneWithTransition` method.
 
-	{title="scenes.coffee"}
-		class SceneA extends Scene
-		  constructor: ->
+.scenes.coffee
+[source,coffeescript]
+----
+class SceneA extends Scene
+  constructor: ->
 
-		...
-		info.on 'click', ->
-		  scene = new SceneInfo()
-		  leanpub-start-insert
-		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationA'
-		  leanpub-end-insert
+...
+info.on 'click', ->
+  scene = new SceneInfo()
+  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationA'
 
-		...
-		photoA.on 'click', ->
-		  scene = new SceneB('a')
-		  leanpub-start-insert
-		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
-		  leanpub-end-insert
+...
+photoA.on 'click', ->
+  scene = new SceneB('a')
+  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
 
-		...
-		photoB.on 'click', ->
-		  scene = new SceneB('b')
-		  leanpub-start-insert
-		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
-		  leanpub-end-insert
+...
+photoB.on 'click', ->
+  scene = new SceneB('b')
+  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
 
-		...
-		photoC.on 'click', ->
-		  scene = new SceneB('c')
-		  leanpub-start-insert
-		  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
-		  leanpub-end-insert
+...
+photoC.on 'click', ->
+  scene = new SceneB('c')
+  sceneManager.pushSceneWithTransition scene, 'TransitionAnimationB'
+----
 
-
-### What just happened?
+=== What just happened?
 
 We have added a custom animated transition when we switch scene in the app.
 
-#### Adding the generated transition
+==== Adding the generated transition
 
 Any exported Flash movieclip is put into a `lib` namespace. For example, if the movieclip name is `AnimatedBall`, we can create an instance by using `new lib.AnimatedBall()`.
 
 In our code, the transition class name is a variable. By using the array notation instead of dot notation, we can create new instance of a class where the class name is variable.
 
-{line-numbers=off}
-	new lib[transitionClassName]()
+[source,coffeescript]
+----
+new lib[transitionClassName]()
+----
 
-#### Custom event: sceneShouldChange
+==== Custom event: sceneShouldChange
 
 In the scene manager, we listen to the `sceneShouldChange` event and toggle the new scene’s visibility.
 
-	transition.on 'sceneShouldChange', ->
-	  scene.visible = true
+[source,coffeescript]
+----
+transition.on 'sceneShouldChange', ->
+  scene.visible = true
+----
 
 This relies on the Flash animation which dispatches the event at the middle of the transition animation.
 
-![sceneShouldChange event in the Flash timeline](images/project-1-scene-should-change.png)
+image:images/project-1-scene-should-change.png[sceneShouldChange event in the Flash timeline]
 
 In the screenshot, you will find an action is defined in the middle of the transition animation. When the animation reaches this frame, it dispatch the event. We capture this custom event in the scene manager to actually switch the scene.

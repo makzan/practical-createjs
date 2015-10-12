@@ -18,20 +18,32 @@ https://github.com/createjs
 Let’s follow the following steps to setup our canvas and CreateJS library.
 
 1. In the `index.html`, we prepare the basic HTML structure.
-
-	\<\<(code/code-1.2.index.html)
++
+[source,html]
+----
+include::code/code-1.2.index.html[]
+----
 
 2. We have minimal styling in this task because our focus is on the canvas element. Add the following CSS to the `styles/app.css` file.
-
-	\<\<(code/code-1.2.app.css)
++
+[source,css]
+----
+include::code/code-1.2.app.css[]
+----
 
 3. We created a file named `setting.coffee` which holds our global app configuration variables. Add the following width and height setting to the file.
-
-	\<\<(code/code-1.2.setting.coffee)
++
+[source,coffeescript]
+----
+include::code/code-1.2.setting.coffee[]
+----
 
 4. Then we create the entry point of our app in the `app.coffee`. Add the following code to the file.
-
-	\<\<(code/code-1.2.app.coffee)
++
+[source,coffeescript]
+----
+include::code/code-1.2.app.coffee[]
+----
 
 5. We have created the app’s foundation. Although we don’t see any content yet, the app foundation is ready and we can add our scene to the app in next step.
 
@@ -41,6 +53,7 @@ We just created the basic canvas app and CreateJS setup. In next step, we’ll b
 
 ==== Viewport
 
+[source,html]
 ----
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ----
@@ -53,6 +66,7 @@ NOTE: If you want to provide an app like experience where users cannot zoom the 
 
 ==== Web app capable
 
+[source,html]
 ----
 <meta name="apple-mobile-web-app-capable" content="yes">
 ----
@@ -61,12 +75,14 @@ We want to provide an app experience to the user. When user add the web app into
 
 ==== Default value when variable is undefined
 
+[source,js]
 ----
 this.exampleApp ?= {}
 ----
 
 The equivalent way in JavaScript is:
 
+[source,js]
 ----
 if (this.exampleApp == null) this.exampleApp = {}
 ----
@@ -74,6 +90,7 @@ if (this.exampleApp == null) this.exampleApp = {}
 We can also express the same meaning with the following line, which
 looks cleaner.
 
+[source,s]
 ----
 this.exampleApp = this.exampleApp || {}
 ----
@@ -85,6 +102,7 @@ NOTE: I will update this section to use Flexbox for center alignment.
 The canvas has fixed dimension. We can use the following styles to
 center aligning the canvas at the middle of the page.
 
+[source,css]
 ----
 #app > canvas {
   position: absolute;
@@ -107,6 +125,7 @@ http://css-tricks.com/centering-css-complete-guide/
 The `class` in CoffeeScript allows us to define a class definition and
 then we can create instance via the `new` method.
 
+[source,coffeescript]
 ----
 class App
   # Entry point.
@@ -118,6 +137,7 @@ new App()
 
 Let’s take a look at the JavaScript from the CoffeeScript generator.
 
+[source,coffeescript]
 ----
 var App;
 

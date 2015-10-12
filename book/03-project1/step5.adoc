@@ -2,177 +2,191 @@
 
 In this step, we build a simple scene manager to control the presence of different scenes.
 
-### Preparation
+=== Preparation
 
 Our scene management is inspired from the navigation controller in iOS. The navigation controller stores a stack of added scene. Developers that use this manager can push and pop scenes.
 
-### Time for Action
+=== Time for Action
 
 Let’s follow the steps to create our own scene manager for the app.
 
 1. We have more than 1 scene in our app. To make things easier, we design a scene manager that manage the scene displaying and leaving. we create a new file named `scene-management.coffee` for this logic. Then put the following code into the newly created file.
++
+.scene-management.coffee
+[source,coffeescript]
+----
+# a global app object.
+this.exampleApp ?= {}
 
-	{title="scene-management.coffee"}
-		# a global app object.
-		this.exampleApp ?= {}
-
-		# An object to manage scene, under the app namespace.
-		this.exampleApp.sceneManager = {
-		  stage: undefined
-		  scenes: []
-		  lastScene: -> @scenes[@scenes.length-1]
-		  resetWithScene: (scene) ->
-		    @scenes.length = 0
-		    @scenes.push scene
-		    @stage.addChild scene
-		  popScene: ->
-		    @stage.removeChild @lastScene()
-		    @scenes.pop()
-		    @lastScene().mouseEnabled = true
-		  pushScene: (scene)->
-		    @lastScene().mouseEnabled = false
-		    @scenes.push scene
-		    @stage.addChild scene
-		}
+# An object to manage scene, under the app namespace.
+this.exampleApp.sceneManager = {
+  stage: undefined
+  scenes: []
+  lastScene: -> @scenes[@scenes.length-1]
+  resetWithScene: (scene) ->
+    @scenes.length = 0
+    @scenes.push scene
+    @stage.addChild scene
+  popScene: ->
+    @stage.removeChild @lastScene()
+    @scenes.pop()
+    @lastScene().mouseEnabled = true
+  pushScene: (scene)->
+    @lastScene().mouseEnabled = false
+    @scenes.push scene
+    @stage.addChild scene
+}
+----
 
 2. We create more scenes to test our example. Add the `SceneB` to the `scenes.coffee`.
++
+.scenes.coffee
+[source,coffeescript]
+----
+class SceneB extends Scene
+  constructor: (contentId='a')->
+    super('white')
 
-	{title="scenes.coffee"}
-		class SceneB extends Scene
-		  constructor: (contentId='a')->
-		    super('white')
+    content = new cjs.Bitmap "images/page-view-content-#{contentId}.png"
+    content.scaleX = content.scaleY = 0.5
+    @addChild content
 
-		    content = new cjs.Bitmap "images/page-view-content-#{contentId}.png"
-		    content.scaleX = content.scaleY = 0.5
-		    @addChild content
+    header = new cjs.Bitmap 'images/header-back.png'
+    header.scaleX = header.scaleY = 0.5
+    @addChild header
 
-		    header = new cjs.Bitmap 'images/header-back.png'
-		    header.scaleX = header.scaleY = 0.5
-		    @addChild header
-
-		    header.on 'click', ->
-		      sceneManager.popScene()
+    header.on 'click', ->
+      sceneManager.popScene()
+----
 
 3. Then we create the `SceneInfo`.
++
+.scenes.coffee
+[source,coffeescript]
+----
+class SceneInfo extends Scene
+  constructor: ->
+    super('white')
 
-	{title="scenes.coffee"}
-		class SceneInfo extends Scene
-		  constructor: ->
-		    super('white')
+    content = new cjs.Bitmap "images/info-content.png"
+    content.scaleX = content.scaleY = 0.5
+    @addChild content
 
-		    content = new cjs.Bitmap "images/info-content.png"
-		    content.scaleX = content.scaleY = 0.5
-		    @addChild content
-
-		    @on 'click', ->
-		      sceneManager.popScene()
+    @on 'click', ->
+      sceneManager.popScene()
+----
 
 4. Make sure we export the newly defined class so that the `App`, which is in another file, can access to these classes.
-
-	{title="app.coffee"}
-		# export to global app scope
-		this.exampleApp.SceneA = SceneA
-		this.exampleApp.SceneB = SceneB
-		this.exampleApp.SceneInfo = SceneInfo
-
++
+.app.coffee
+[source,coffeescript]
+----
+# export to global app scope
+this.exampleApp.SceneA = SceneA
+this.exampleApp.SceneB = SceneB
+this.exampleApp.SceneInfo = SceneInfo
+----
 
 5. In the `scenes.coffee` file, we add the click event handling to the menu elements. Tapping the elements will lead to a new scene to display the image or the information scene.
++
+.scenes.coffee
+[source,coffeescript]
+----
+sceneManager = this.exampleApp.sceneManager
 
-	{title="scenes.coffee"}
-		sceneManager = this.exampleApp.sceneManager
+info = new cjs.Bitmap 'images/info.png'
+info.y = 356
+info.scaleX = info.scaleY = 0.5
+@addChild info
+info.on 'click', -> <1>
+  scene = new SceneInfo()
+  sceneManager.pushScene scene
 
-		info = new cjs.Bitmap 'images/info.png'
-		info.y = 356
-		info.scaleX = info.scaleY = 0.5
-		@addChild info
-		leanpub-start-insert
-		info.on 'click', ->
-		  scene = new SceneInfo()
-		  sceneManager.pushScene scene
-		leanpub-end-insert
+# Menu item 1
+photoA = new cjs.Bitmap 'images/a.png'
+photoA.y = 38
+photoA.scaleX = photoA.scaleY = 0.5
+@addChild photoA
+photoA.on 'click', -> <1>
+  scene = new SceneB('a')
+  sceneManager.pushScene scene
 
-		# Menu item 1
-		photoA = new cjs.Bitmap 'images/a.png'
-		photoA.y = 38
-		photoA.scaleX = photoA.scaleY = 0.5
-		@addChild photoA
-		leanpub-start-insert
-		photoA.on 'click', ->
-		  scene = new SceneB('a')
-		  sceneManager.pushScene scene
-		leanpub-end-insert
+# Menu item 2
+photoB = new cjs.Bitmap 'images/b.png'
+photoB.y = 146
+photoB.scaleX = photoB.scaleY = 0.5
+@addChild photoB
+photoB.on 'click', -> <1>
+  scene = new SceneB('b')
+  sceneManager.pushScene scene
+leanpub-end-insert
 
-		# Menu item 2
-		photoB = new cjs.Bitmap 'images/b.png'
-		photoB.y = 146
-		photoB.scaleX = photoB.scaleY = 0.5
-		@addChild photoB
-		leanpub-start-insert
-		photoB.on 'click', ->
-		  scene = new SceneB('b')
-		  sceneManager.pushScene scene
-		leanpub-end-insert
-
-		# Menu item 3
-		photoC = new cjs.Bitmap 'images/c.png'
-		photoC.y = 253
-		photoC.scaleX = photoC.scaleY = 0.5
-		@addChild photoC
-		leanpub-start-insert
-		photoC.on 'click', ->
-		  scene = new SceneB('c')
-		  sceneManager.pushScene scene
-		leanpub-end-insert
+# Menu item 3
+photoC = new cjs.Bitmap 'images/c.png'
+photoC.y = 253
+photoC.scaleX = photoC.scaleY = 0.5
+@addChild photoC
+photoC.on 'click', -> <1>
+  scene = new SceneB('c')
+  sceneManager.pushScene scene
+----
+<1> Added click event
 
 6. We have created a few new scenes. Make sure we have aliased these new classes in the `app.coffee` file.
-
-	{title="app.coffee"}
-		# alias
-		cjs = createjs
-		setting = this.exampleApp.setting
-		leanpub-start-insert
-		sceneManager = this.exampleApp.sceneManager
-		leanpub-end-insert
-		SceneA = this.exampleApp.SceneA
-		leanpub-start-insert
-		SceneB = this.exampleApp.SceneB
-		SceneInfo = this.exampleApp.SceneInfo
-		leanpub-end-insert
++
+.app.coffee
+[source,coffeescript]
+----
+# alias
+cjs = createjs
+setting = this.exampleApp.setting
+sceneManager = this.exampleApp.sceneManager <1>
+SceneA = this.exampleApp.SceneA
+SceneB = this.exampleApp.SceneB <1>
+SceneInfo = this.exampleApp.SceneInfo <1>
+----
+<1> Added line.
 
 7. In the main `App` logic, We removed the old Scene creation logic and make use of the `sceneManager` to handle the scene visualization.
++
+.app.coffee
+[source,coffeescript]
+----
+class App
+  constructor: ->
+    ...
 
-	{title="app.coffee"}
-		class App
-		  constructor: ->
-		    ...
+    leanpub-start-delete
+    sceneA = new SceneA()
+    @stage.addChild sceneA
+    leanpub-end-delete
 
-		    leanpub-start-delete
-		    sceneA = new SceneA()
-		    @stage.addChild sceneA
-		    leanpub-end-delete
+    sceneManager.stage = @stage
 
-		    sceneManager.stage = @stage
+    scene = new SceneA()
+    sceneManager.resetWithScene scene
+----
 
-		    scene = new SceneA()
-		    sceneManager.resetWithScene scene
+8. We created new files so we need to include the files in the `Gulpfile` compiling pipeline.
++
+[source,coffeescript]
+.Gulpfile.coffee
+----
+gulp.task 'js', ->
+  gulp.src [
+    './app/scripts/setting.coffee'
+    leanpub-start-insert
+    './app/scripts/scene-manager.coffee'
+    leanpub-end-insert
+    './app/scripts/scenes.coffee'
+    './app/scripts/app.coffee'
+  ]
+  .pipe coffee()
+  .pipe concat 'app.js'
+  .pipe gulp.dest './app/scripts/'
+----
 
-8. We created new files so we need to include the files in the Gulpfile compiling pipeline.
-
-	{title="Gulpfile.coffee"}
-		gulp.task 'js', ->
-		  gulp.src [
-		    './app/scripts/setting.coffee'
-		    leanpub-start-insert
-		    './app/scripts/scene-manager.coffee'
-		    leanpub-end-insert
-		    './app/scripts/scenes.coffee'
-		    './app/scripts/app.coffee'
-		  ]
-		  .pipe coffee()
-		  .pipe concat 'app.js'
-		  .pipe gulp.dest './app/scripts/'
-
-### What just happened?
+=== What just happened?
 
 The scene manager is an object without class definition. We put it on the `exampleApp` namespace to let other modules access it.
 

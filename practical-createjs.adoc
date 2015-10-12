@@ -16,4 +16,6 @@ include::book/02-preparation/0-preparation.adoc[leveloffset=+1]
 
 include::book/03-project1/0-project1.adoc[leveloffset=+1]
 
+include::book/04-project2/0-project2.adoc[leveloffset=+1]
+
 include::book/99-backmatter/0-backmatter.adoc[leveloffset=+1]

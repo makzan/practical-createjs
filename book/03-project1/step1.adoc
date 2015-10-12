@@ -16,61 +16,81 @@ automation setup.
 1.  First, let’s create a folder for all the files in this project. The
 following is the initial file structure setup.
 +
-<<(code/code-1.1.1.txt)
+----
+include::code/code-1.1.1.txt[]
+----
+
 2.  We can generate the `package.json` file via the `npm init` method.
 After we go through the `npm init` process, we can then install the
 plugins via the following shell command.
 +
+[source,bash]
 ----
 $ npm install --save-dev gulp coffee-script gulp-coffee gulp-concat
 ----
+
 3.  After step 2, node.js should have written the following content into
 the `package.json` file. Check if you get similar result.
 +
-<<(code/code-1.1.package.json)
+[source,json]
+----
+include::code/code-1.1.package.json[]
+----
+
 4.  Gulp always looks for the `Gulpfile.js` file when we execute the
 gulp tasks. If we want to write the Gulp tasks in CoffeeScript syntax,
 we need to load the CoffeeScript compiler in the `Gulpfile.js` and
 include the `.coffee` version of the GulpFile.
 +
-<<(code/code-1.1.gulp.js)
+[source,javascript]
+----
+include::code/code-1.1.gulp.js[]
+----
+
 5.  Now we can write our Gulp pipeline in CoffeeScript. The following
 configuration defines how the compiler should compile our source files.
 It also defined a `watch` task that watch any changes of `.coffee` file
 and go through the `js` task automatically.
 +
-<<(code/code-1.1.gulp.coffee)
+[source,coffeescript]
+----
+include::code/code-1.1.gulp.coffee[]
+----
+
 6.  We create 2 CoffeeScript files to see if our `Gulpfile` works. They
 are `app.coffee` and `setting.coffee`. We will add real code logic into
 these files in next step.
 +
-<<(code/code-1.1.app.coffee)
+[source,coffeescript]
+----
+include::code/code-1.1.app.coffee[]
+----
 +
-<<(code/code-1.1.setting.coffee)
+[source,coffeescript]
+----
+include::code/code-1.1.setting.coffee[]
+----
 7.  Now we can run `gulp` in the terminal:
 +
 ----
 $ ./node_modules/.bin/gulp
 ----
-8.  We should see an `app.js` file is generated with the following
-content.
+8.  We should see an `app.js` file is generated with the following content.
 +
-<<(code/code-1.1.app.js)
+[source,javascript]
+----
+include::code/code-1.1.app.js[]
+----
 
 If you get the same result, that means our setup works.
 
 === What just happened?
 
-We just set up the assets compiling tool chain. After setting up the
-building streamline, we are ready to dig into the early project
-development in next task.
+We just set up the assets compiling tool chain. After setting up the building streamline, we are ready to dig into the early project development in next task.
 
 === Init a Node.js project with package.json
 
-The development environment uses Node.js, although the project is for
-web browser. We need to setup the project folder with an npm—Node.js
-Package Manager. We can execute `npm init` and following the steps to
-generate a `package.json` file in the project directory.
+The development environment uses Node.js, although the project is for web browser. We need to setup the project folder with an npm—Node.js Package Manager. We can execute `npm init` and following the steps to generate a `package.json` file in the project directory.
 
 After created the `package.json` file, we called the `npm install`.
 
@@ -78,8 +98,6 @@ After created the `package.json` file, we called the `npm install`.
 $ npm install --save-dev gulp coffee-script gulp-coffee gulp-concat
 ----
 
-The command installs the required package to compile our source code
-into JavaScript file. We used `--save-dev` which records the provided
-Node.js package as dependency libraries inside the `package.json`.
+The command installs the required package to compile our source code into JavaScript file. We used `--save-dev` which records the provided Node.js package as dependency libraries inside the `package.json`.
 
 NOTE: If you’re working on a project with `package.json` file exists, you can use `npm install` to install node modules based on the existing `package.json` configuration. This happens when you clone a project from an external code repository.

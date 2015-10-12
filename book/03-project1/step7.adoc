@@ -1,67 +1,76 @@
 == Step 7. Optimizing for retina display
 
-We may find the app looks blurry when we test the web app in iPhone or Android device with high-definition display. That’s because the retina display trys to render the graphics by doubling our pixels. In this step, we optimize the canvas rendering in retina display.
+We may find the app looks blurry when we test the web app in iPhone or Android device with high-definition display. That’s because the retina display tries to render the graphics by doubling our pixels. In this step, we optimize the canvas rendering in retina display.
 
-### Time for Action
+=== Time for Action
 
 Let’s add the `retinalize` utility via the following steps.
 
 1. The `retinalize` method is kind of utility that’s independent to our logic. We create a new file `utility.coffee` and place the following code inside it.
++
+.utility.coffee
+[source,coffeescript]
+----
+retinalize = (canvas, stage) ->
+  # We skip the logic if the device is not retina
+  # or it doesn’t support the pixel ratio
+  return if (window.devicePixelRatio)
 
-	{title="utility.coffee", lang=coffeescript}
-		retinalize = (canvas, stage) ->
-		  # We skip the logic if the device is not retina
-		  # or it doesn’t support the pixel ratio
-		  return if (window.devicePixelRatio)
+  # cache the pixel ratio
+  ratio = window.devicePixelRatio
+  # get the original canvas dimension
+  height = canvas.getAttribute('height')
+  width = canvas.getAttribute('width')
 
-		  # cache the pixel ratio
-		  ratio = window.devicePixelRatio
-		  # get the original canvas dimension
-		  height = canvas.getAttribute('height')
-		  width = canvas.getAttribute('width')
+  # set the new dimension with ratio multiplication
+  canvas.setAttribute('width', Math.round(width * ratio))
+  canvas.setAttribute('height', Math.round( height * ratio))
 
-		  # set the new dimension with ratio multiplication
-		  canvas.setAttribute('width', Math.round(width * ratio))
-		  canvas.setAttribute('height', Math.round( height * ratio))
+  # ensure the canvas CSS style follows the original dimension
+  canvas.style.width = width+"px"
+  canvas.style.height = height+"px"
 
-		  # ensure the canvas CSS style follows the original dimension
-		  canvas.style.width = width+"px"
-		  canvas.style.height = height+"px"
+  # scale the entire stage so we can use the original coordinate in our app.
+  stage.scaleX = stage.scaleY = ratio
+----
 
-		  # scale the entire stage so we can use the original coordinate in our app.
-		  stage.scaleX = stage.scaleY = ratio
+2. We can then call the `retinalize` method after we initialize the canvas and stage variable.
++
+.app.coffee
+[source,coffeescript]
+----
+class App
+# Entry point.
+constructor: ->
+  console.log "Welcome to my portfolio."
+  @canvas = document.getElementById("app-canvas")
+  @stage = new cjs.Stage(@canvas)
 
-2. We can then call the retinalize method after we initialize the canvas and stage variable.
-
-	{title="app.coffee"}
-	    class App
-		  # Entry point.
-		  constructor: ->
-		    console.log "Welcome to my portfolio."
-		    @canvas = document.getElementById("app-canvas")
-		    @stage = new cjs.Stage(@canvas)
-
-		    window.utility.retinalize(@canvas, @stage)
+  window.utility.retinalize(@canvas, @stage)
+----
 
 3. We have created a new file. As usual, we include the new file in our compiling pipeline. Add the following highlighted line to the `Gulpfile.coffee`.
++
+.Gulpfile.coffee
+[source,coffeescript]
+----
+gulp.task 'js', ->
+  gulp.src [
+    './app/scripts/setting.coffee'
+    leanpub-start-insert
+    './app/scripts/retinalize.coffee'
+    leanpub-end-insert
+    './app/scripts/scene-manager.coffee'
+    './app/scripts/scenes.coffee'
+    './app/scripts/app.coffee'
+  ]
+  .pipe coffee()
+  .pipe concat 'app.js'
+  .pipe gulp.dest './app/scripts/'
+----
 
-	{title="Gulpfile.coffee"}
-		gulp.task 'js', ->
-		  gulp.src [
-		    './app/scripts/setting.coffee'
-		    leanpub-start-insert
-		    './app/scripts/retinalize.coffee'
-		    leanpub-end-insert
-		    './app/scripts/scene-manager.coffee'
-		    './app/scripts/scenes.coffee'
-		    './app/scripts/app.coffee'
-		  ]
-		  .pipe coffee()
-		  .pipe concat 'app.js'
-		  .pipe gulp.dest './app/scripts/'
-
-### What just happened?
+=== What just happened?
 
 When the browser detects the display has a higher devicePixelRatio, which means for every ‘point’ of the display, it renders more than 1 pixels. For such types of display, we enlarge the canvas content while keeping the dimension of the  `<canvas>` element unchanged. This allows the retina display to render the graphics in its native pixel resolution, and hence make the canvas graphics looks sharp.
 
-I\> It’s worth noting that the retina display not only applies to mobile device but also desktops, such as Mackbook Pro Retina and the 5K retina iMac.
+NOTE: It’s worth noting that the retina display not only applies to mobile device but also desktops, such as Mackbook Pro Retina and the 5K retina iMac.
