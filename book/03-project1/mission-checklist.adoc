@@ -1,0 +1,11 @@
+== Mission Checklist
+
+We are going to build the portfolio project by following these tasks.
+
+1. Setting up the project and GulpJS.
+2. Setting up the canvas and CreateJS library.
+3. Defining scene as container inheritance.
+4. Adding static stylish menu.
+5. Displaying another scene after menu selection.
+6. Animating transition between scenes.
+7. Optimizing the rendering for retina display.

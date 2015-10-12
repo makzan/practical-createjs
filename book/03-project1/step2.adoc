@@ -1,0 +1,132 @@
+== Step 2. Setting up the canvas and CreateJS library
+
+In this step, we setup the canvas and the CreateJS for the project.
+
+=== Preparation
+
+We need the CreateJS library. The easiest way to include the CreateJS is via the distribution of content delivery network.
+
+http://code.createjs.com/
+
+Optionally, we can download the code from the CreateJS github repository and host the files ourselves.
+
+https://github.com/createjs
+
+
+=== Time for Action—Setting up the Canvas and CreateJS Stage
+
+Let’s follow the following steps to setup our canvas and CreateJS library.
+
+1. In the `index.html`, we prepare the basic HTML structure.
+
+	\<\<(code/code-1.2.index.html)
+
+2. We have minimal styling in this task because our focus is on the canvas element. Add the following CSS to the `styles/app.css` file.
+
+	\<\<(code/code-1.2.app.css)
+
+3. We created a file named `setting.coffee` which holds our global app configuration variables. Add the following width and height setting to the file.
+
+	\<\<(code/code-1.2.setting.coffee)
+
+4. Then we create the entry point of our app in the `app.coffee`. Add the following code to the file.
+
+	\<\<(code/code-1.2.app.coffee)
+
+5. We have created the app’s foundation. Although we don’t see any content yet, the app foundation is ready and we can add our scene to the app in next step.
+
+=== What just happened?
+
+We just created the basic canvas app and CreateJS setup. In next step, we’ll build our scene. Let’s take a look at each part of code in this step.
+
+==== Viewport
+
+----
+<meta name="viewport" content="width=device-width, initial-scale=1">
+----
+
+We target the app to be a mobile application. So we need to set a viewport. Mobile web browser simulate the device width as a desktop monitor to provide a better viewing experience for most desktop-only website. Viewport lets web designer tells the mobile browser the display configurations we want.
+
+The default viewport of mobile web browser is about 980px. If we have created the styles dedicated to narrow screen, such as 320px width, we should change the viewport width to reflect the real device width.
+
+NOTE: If you want to provide an app like experience where users cannot zoom the view, you may consider adding the `minimum-scale` and `maximum-scale` value to the viewport. In contrasts, adding these two constants to web site will harm the user experience because website readers expect they can pinch to zoom any web pages.
+
+==== Web app capable
+
+----
+<meta name="apple-mobile-web-app-capable" content="yes">
+----
+
+We want to provide an app experience to the user. When user add the web app into home screen, normal web pages act as bookmark. Tapping on them launch the mobile safari. After we set the `apple-mobile-web-app-capable`, the home screen bookmark acts like a real app. It has its own we view without the Safari user interface. It also has its own app switching screen in the multitask screen when user clicked the home button twice.
+
+==== Default value when variable is undefined
+
+----
+this.exampleApp ?= {}
+----
+
+The equivalent way in JavaScript is:
+
+----
+if (this.exampleApp == null) this.exampleApp = {}
+----
+
+We can also express the same meaning with the following line, which
+looks cleaner.
+
+----
+this.exampleApp = this.exampleApp || {}
+----
+
+==== Centering the canvas
+
+NOTE: I will update this section to use Flexbox for center alignment.
+
+The canvas has fixed dimension. We can use the following styles to
+center aligning the canvas at the middle of the page.
+
+----
+#app > canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 400px;
+  width: 300px;
+  margin-top: -200px;
+  margin-left: -150px;
+}
+----
+
+The code is inspired from the following CSS-Tricks website which shares
+different styling approaches to center elements.
+
+http://css-tricks.com/centering-css-complete-guide/
+
+==== Class definition in CoffeeScript
+
+The `class` in CoffeeScript allows us to define a class definition and
+then we can create instance via the `new` method.
+
+----
+class App
+  # Entry point.
+  constructor: ->
+
+# Start the app
+new App()
+----
+
+Let’s take a look at the JavaScript from the CoffeeScript generator.
+
+----
+var App;
+
+App = (function() {
+  function App() {}
+
+  return App;
+
+})();
+
+new App();
+----

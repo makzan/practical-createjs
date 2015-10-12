@@ -1,0 +1,71 @@
+== Step 4. Adding static stylish menu
+
+In this step, we implement the menu scene and put menu item on it.
+
+
+
+### Time for Action
+
+Let’s follow the steps to create the menu scene.
+
+1. We create the our menu scene. Let’s add the code to `scenes.coffee`.
+
+	{title="scenes.coffee"}
+		class SceneA extends Scene
+		  constructor: ->
+		    super('#EDE4D1')
+
+		    header = new cjs.Bitmap 'images/header.png'
+		    header.scaleX = header.scaleY = 0.5
+		    @addChild header
+
+		    info = new cjs.Bitmap 'images/info.png'
+		    info.y = 356
+		    info.scaleX = info.scaleY = 0.5
+		    @addChild info
+
+		    photoA = new cjs.Bitmap 'images/a.png'
+		    photoA.y = 38
+		    photoA.scaleX = photoA.scaleY = 0.5
+		    @addChild photoA
+
+		    photoB = new cjs.Bitmap 'images/b.png'
+		    photoB.y = 146
+		    photoB.scaleX = photoB.scaleY = 0.5
+		    @addChild photoB
+
+		    photoC = new cjs.Bitmap 'images/c.png'
+		    photoC.y = 253
+		    photoC.scaleX = photoC.scaleY = 0.5
+		    @addChild photoC
+
+		# export to global app scope
+		this.exampleApp.SceneA = SceneA
+
+
+2. Make sure we import any newly created class into our App scope in order to use them.
+
+	{title="app.coffee"}
+		# alias
+		cjs = createjs
+		setting = this.exampleApp.setting
+		leanpub-start-delete
+		Scene = this.exampleApp.Scene
+		leanpub-end-delete
+		leanpub-start-insert
+		SceneA = this.exampleApp.SceneA
+		leanpub-end-insert
+
+
+3. In the app logic, we replace the old `Scene` by the newly created `SceneA` class.
+
+	{title="app.coffee"}
+		class App
+		  constructor: ->
+		    ...
+		    sceneA = new SceneA()
+		    @stage.addChild sceneA
+
+### What just happened?
+
+We created a new scene by inheriting the original `Scene` class definition. The inheritance allows us to define custom scene easily.

@@ -1,0 +1,190 @@
+== Step 3. Defining scene as container inheritance
+In this step, we define the Scene class which every page view builds on top of it.
+
+=== Time for Action—Defining the Scene class
+Let’s follow the steps to define a `Scene` class.
+
+1. We create a dedicated file for the scenes definition. Add the following code to the `scenes.coffee`.
++
+----
+# a global app object.
+this.exampleApp ?= {}
+
+# alias
+cjs = createjs
+setting = this.exampleApp.setting
+
+class Scene extends cjs.Container
+  constructor: (bgColor='blue')->
+    # CreateJS super constructor
+    @initialize()
+
+    # Draw a shape as the background color
+    if bgColor != undefined
+      shape = new cjs.Shape()
+      shape.graphics
+        .beginFill bgColor
+        .drawRect 0, 0, setting.width, setting.height
+
+      # Add the shape to the display list, via using addChild
+      @addChild shape
+
+# export to global app scope
+this.exampleApp.Scene = Scene
+----
+
+2. In the `app.coffee`, we create the Scene instance and add it to the stage. This is a testing scene, we are going to change it to the real scene in next step.
++
+----
+Scene = this.exampleApp.Scene
+
+class App
+  constructor: ->
+    ...
+    leanpub-start-insert
+    # Temporary testing scene
+    testScene = new Scene('gold')
+    @stage.addChild testScene
+    leanpub-end-insert
+----
+
+3. We have created a new file `scenes.coffee`, we need to include it into the GulpJS pipeline. Add the file into the `gulp.src` array.
++
+----
+gulp.task 'js', ->
+  gulp.src [
+    './app/scripts/setting.coffee'
+    leanpub-start-insert
+    './app/scripts/scenes.coffee'
+    leanpub-end-insert
+    './app/scripts/app.coffee'
+  ]
+  .pipe coffee()
+  .pipe concat 'app.js'
+  .pipe gulp.dest './app/scripts/'
+----
+
+=== What just happened?
+
+We have defined a `Scene` class and added a testing scene object to the stage.
+
+==== Vector shape drawing
+
+A shape is vector graphic that we express in mathematics. It’s like giving instruction on what the shape should look like.
+
+----
+shape = new cjs.Shape()
+shape.graphics
+  .beginFill "white"
+  .drawRect 0, 0, 100, 50
+----
+
+NOTE: If you need to draw complex shapes that are difficult to express in code, you may consider drawing the shapes in Adobe Flash and export it to JavaScript to use.
+
+For every created display object, we need to add it to the display list. The following code assumes that we are adding the shape to a container.
+
+----
+@addChild shape
+----
+
+If we are adding the shape to the stage, we can call the `stage.addChild` because the `stage` is a container.
+
+=== Class inheritance in CoffeeScript
+
+The CoffeeScript inheritance took us 3 lines to inherit class.
+
+----
+class Scene extends cjs.Container
+  constructor: (bgColor='blue')->
+    @initialize()
+----
+
+In the generated code. It would take 13 lines of code in JavaScript, not including the `_extends` helper function.
+
+----
+var Scene,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Scene = (function(_super) {
+  __extends(Scene, _super);
+
+  function Scene(bgColor) {
+    if (bgColor == null) {
+      bgColor = 'blue';
+    }
+    this.initialize();
+  }
+
+  return Scene;
+
+})(cjs.Container);
+----
+
+Actually, all the CreateJS follows its own way to create the object inheritance structure. The following source code of the `Shape` class shows  how CreateJS inherits.
+
+.Shape.js, from CreateJS
+----
+(function() {
+  "use strict";
+
+  var Shape = function(graphics) {
+    this.initialize(graphics);
+  };
+  var p = Shape.prototype = new createjs.DisplayObject();
+  Shape.prototype.constructor = Shape;
+
+  // public properties:
+
+    p.graphics = null;
+
+  // constructor:
+
+    p.DisplayObject_initialize = p.initialize;
+
+    p.initialize = function(graphics) {
+      this.DisplayObject_initialize();
+      this.graphics = graphics ? graphics : new createjs.Graphics();
+    };
+
+
+    p.isVisible = function() {
+      ...
+    };
+
+
+    p.DisplayObject_draw = p.draw;
+
+
+    p.draw = function(ctx, ignoreCache) {
+      ...
+    };
+
+
+    p.clone = function(recursive) {
+      ...
+    };
+
+    p.toString = function() {
+      ...
+    };
+
+  createjs.Shape = Shape;
+}());
+----
+
+=== Exporting the class definition
+
+We separate each part of code into its own file. The benefit of having separated files is that we can modularity logic into very specific domain. For every specific module, we only focus on its own logic. This helps making each parts less bugs.
+
+It is a good practice that each file is separated. The compiled JavaScript of each files are put into an isolated function group by default. If we need to expose specific variables to other files, we can reference them to the global object under the app namespace.
+
+----
+this.exampleApp.Scene = Scene
+----
+
+Then we can reference the exported Class in another file.
+
+----
+Scene = this.exampleApp.Scene
+----

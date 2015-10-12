@@ -1,0 +1,20 @@
+== Project Preparation
+
+Throughout the project, we need several graphic files to complete the
+project. Please download the files via the following link.
+
+http://mak.la/cjs-proj1.zip
+
+After you downloaded the file, you will see the following files in the bundle.
+
+image:images/project-1-assets.png[PNG files for project 1]
+
+----
+images/
+images/header.png
+…
+scripts/transitions.js
+graphics_src/transitions.fla
+----
+
+The `transitions.js` file is the animated transition exported from the Adobe Flash. If you don’t have the Adobe Flash, you can just use this file who comes with 2 transitions to follow the example. If you have Flash, however, you can open the `transitions.fla` file and customize the transition animation. You may even create new transition effects. We will talk about this later.
