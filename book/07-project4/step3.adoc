@@ -1,0 +1,41 @@
+== Step 3: Basic list selection and calculation
+
+In this task, we handle the radio and checkboxes clicking and calculate the sum of area of selected countries.
+
+=== Time for Action
+
+Let’s follow the steps to handle the radio and checkbox selection.
+
+1. In the `view.coffee`, we add a function that check the input changes and display the calculation.
++
+.view.coffee
+[source,coffeescript]
+----
+this.app.handleListChange = ->
+  # Toggle Chart 1
+  $('input[type="radio"]').change ->
+    value = $('input[type="radio"]:checked').val()
+    $('.output1').text(Math.round(value))
+
+
+  # Toggle Chart 2
+  $('input[type="checkbox"]').change ->
+    sum = 0
+    $('input[type="checkbox"]:checked').each ->
+      sum += $(this).val()*1
+    $('.output2').text(Math.round(sum))
+----
+
+2. In the `app.coffee` file, we register the input changes handling by calling the function by the end of the logic.
++
+.app.coffee
+[source,coffeescript]
+----
+this.app.handleListChange()
+----
+
+=== What just happened?
+
+We handled the checkbox and radio selection.
+
+The logic is based on the pseudo class `:checked` to get the HTML element of the checked input.

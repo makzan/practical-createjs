@@ -1,0 +1,84 @@
+== Step 2: Listing the countries data
+
+In this task, we obtain the list of countries areas and render them into the 2 lists we create in last step.
+
+1. In last task, we created a long list to test the layout. Now we don’t need that list anymore because we are rendering the list dynamically. Replace the 2 `ul` elements into the following.
++
+.index.html
+[source,html]
+----
+<ul id='countries-on-left'>
+  <li class='template'><label><input type='radio' name='target-country'><span class='name'>China</span></label></li>
+</ul>
+...
+<ul id='countries-on-right'>
+  <li class='template'><label><input type='checkbox' name='countries[]'><span class='name'>China</span></label></li>
+</ul>
+----
+
+2. The country data is obtained from [Wikipedia](http://simple.wikipedia.org/wiki/List_of_countries_by_area). We put them into an array of object. For each object, we store the country name and the area.
++
+.data.coffee
+[source,coffeescript]
+----
+this.app ?= {}
+this.app.data ?= {}
+
+# Area of common countries
+# Source from http://simple.wikipedia.org/wiki/List_of_countries_by_area
+this.app.data.areaOfCountries = [
+  {name: 'China', area: 9651.747}
+  {name: 'Russia', area: 17098.242}
+  {name: 'Canada', area: 9889.000}
+  {name: 'USA', area: 9826.675}
+  {name: 'Australia', area:9596.691}
+  ...
+----
+
+3. We have the data now, the next step is to render the data into the HTML list.
++
+.view.coffee
+[source,coffeescript]
+----
+this.app ?= {}
+
+this.app.renderList = ->
+  # List
+  template = $('#countries-on-left').find('.template')
+  countriesOnLeft = $('#countries-on-left')
+  for country in app.data.areaOfCountries
+    clone = template.clone().removeClass('template')
+    clone.find('input[type="radio"]').val(country.area)
+    clone.find('.name').text(country.name)
+    countriesOnLeft.append clone
+  # Remove template after cloning done.
+  template.remove()
+
+  template = $('#countries-on-right').find('.template')
+  countriesOnLeft = $('#countries-on-right')
+  for country in app.data.areaOfCountries
+    clone = template.clone().removeClass('template')
+    clone.find('input[type="checkbox"]').val(country.area)
+    clone.find('.name').text(country.name)
+    countriesOnLeft.append clone
+  # Remove template after cloning done.
+  template.remove()
+----
+
+5. At last, we render the list in the `app.coffee`.
++
+.app.coffee
+[source,coffeescript]
+----
+this.app ?= {}
+
+this.app.renderList()
+----
+
+=== What just happened?
+
+Some JavaScript tutorial may show you to render HTML directly inside the JavaScript.
+
+I prefer using the template approach where the template element of the radio list item and checkbox list item are defined inside the HTML. When I need it, I clone the template and update the data inside.
+
+In this example, we use the template at the initial stage and we don’t need it after the setup logic, so we can remove the clone after the list creation. In some projects, we may need the template at unknown time after the project is setup. In this case, we can hide all the template elements by using `.template{display:none}`.

@@ -1,0 +1,112 @@
+== Preparing the project
+
+Before we get started the project, let’s prepare several files. They are:
+
+1. Gulpfile.coffee
+2. retinalize.coffee
+3. shape.coffee
+
+
+.Gulpfile.coffee
+[source,coffeescript]
+----
+gulp.task 'js', ->
+  gulp.src [
+    './app/scripts/data.coffee'
+    './app/scripts/retinalize.coffee'
+    './app/scripts/shape.coffee'
+    './app/scripts/chart.coffee'
+    './app/scripts/view.coffee'
+    './app/scripts/app.coffee'
+  ]
+  .pipe coffee()
+  .pipe concat 'app.js'
+  .pipe gulp.dest './app/scripts/'
+----
+
+We make the `retinalize` class is ready.
+
+.retinalize.coffee
+[source,coffeescript]
+----
+this.utility ?= {}
+
+this.utility.retinalize = (stage, updateCSS=true) ->
+  canvas = stage.canvas
+  utility.originalCanvasWidth = canvas.width
+  utility.originalCanvasHeight = canvas.height
+
+  return unless window.devicePixelRatio
+
+  ratio = window.devicePixelRatio
+
+  height = canvas.getAttribute('height')
+  width = canvas.getAttribute('width')
+
+  canvas.setAttribute 'width', Math.round( width * ratio )
+  canvas.setAttribute 'height', Math.round( height * ratio )
+
+  if updateCSS
+    canvas.style.width = width+"px"
+    canvas.style.height = height+"px"
+
+  stage.scaleX = stage.scaleY = ratio
+----
+
+Then we have another utility class that draws rectangle shape.
+
+.shape.coffee
+[source,coffeescript]
+----
+# alias
+cjs = createjs
+
+class this.DefaultShape extends cjs.Shape
+  constructor: (@options={}) ->
+    super()
+    @initialize()
+    @applyOptions()
+  applyOptions: ->
+    @options.fillColor ?= null
+    @options.strokeColor ?= null
+    @options.strokeWidth ?= 1
+    @options.width ?= 100
+    @options.height ?= 100
+    @options.x ?= 0
+    @options.y ?= 0
+    return @options
+
+# Shapes
+# options:
+# width, height, fillColor, strokeColor, strokeWidth
+class this.RectShape extends this.DefaultShape
+  constructor: (options={}) ->
+    super(options)
+    @graphics
+      .setStrokeStyle @options.strokeWidth
+      .beginFill @options.fillColor
+      .beginStroke @options.strokeColor
+      .drawRect 0, 0, @options.width, @options.height
+    @x = @options.x
+    @y = @options.y
+----
+
+We’ll need the `RectShape` when we draw the chart in canvas.
+
+
+
+There is basic CSS reset in the `app.css` file.
+
+.app.css
+[source,css]
+----
+/* Basic reset */
+html, body, p, ul, li, h1, h2, h3, div {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+----

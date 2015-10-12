@@ -1,0 +1,147 @@
+== Step 1: Building the app layout with flex
+
+In this task, we build the basic layout by using the flex box. We will create our own minimal flex layout styles. Every elements with class `.container` will treat as flex display. All their children would have `flex:1 1 auto` by default, unless `.shrink` class presents.
+
+=== Time for Actions
+
+Let’s follow the steps to create the app layout by using flex box.
+
+
+1. In the `#app` in HTML, we add the following elements.
++
+.index.html
+[source,html]
+----
+<div id='app' class='container vertical'>
+  <div class='charts container'>
+    <div><canvas width="300" height="150"></canvas></div>
+    <div><canvas width="300" height="150"></canvas></div>
+  </div>
+  <div class='container'>
+    <div class='list container vertical'>
+      <p class='description'>Area: <span class='output1'>0</span>K km<sup>2</sup></p>
+      <ul id='countries-on-left'>
+        <li>List Item</li>
+        <!-- lots of list times -->
+        <li>List Item</li>
+      </ul>
+    </div>
+    <div class='list container vertical'>
+      <p class='description'>Area: <span class='output2'>0</span>K km<sup>2</sup></p>
+      <ul id='countries-on-right'>
+        <li>List Item</li>
+        <!-- lots of list times -->
+        <li>List Item</li>
+      </ul>
+    </div>
+  </div>
+</div>
+----
+
+2. The minimal flex-based layout.
++
+.app.css
+[source,css]
+----
+/* Minimal flex grid */
+.container {
+  display: flex;
+}
+.container.vertical {
+  flex-direction: column;
+}
+.container > * {
+  flex: 1 1 auto;
+  border: 1px solid green; /* debug */
+}
+.container .shrink {
+  flex: 0 1 auto;
+}
+----
+
+3. For the flex to work perfectly, we give a width and height to the container, which is the HTML and body element in this case.
++
+.app.css
+[source,css]
+----
+/* Global */
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+#app {
+  width: 100%;
+  height: 100%;
+  background: IVORY;
+}
+----
+
+4. The flex layout will change the dimension on the children elements. We can specific a minimal width and height so the flex layout will keep a minimal space for the elements.
++
+.app.css
+[source,css]
+----
+/* Canvas */
+canvas {
+  max-width: 100%;
+  min-height: 150px;
+}
+
+.charts {
+  min-height: 150px;
+}
+
+/* Area Description */
+p.description {
+  min-height: 30px;
+}
+----
+
+5. Finally, we make the long list `overflow:scroll` and enable the momentum scrolling.
++
+.app.css
+[source,css]
+----
+/* List */
+ul {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  list-style: none;
+  padding: 5px;
+}
+----
+
+We created a minimal flex based layout.
+
+For every `.container` class, we display the children as flex items.
+
+The children inside the container has `flex: 1 1 auto` by default.
+
+
+	.container
+	+----------------------------------------------------+
+	| .container               .container                |
+	| +----------------------+ +-----------------------+ |
+	| |                      | |                       | |
+	| |                      | |                       | |
+	| |                      | |                       | |
+	| |                      | |                       | |
+	| |                      | |                       | |
+	| +----------------------+ +-----------------------+ |
+	|                                                    |
+	+----------------------------------------------------+
+	|                                                    |
+	|                                                    |
+	|                                                    |        .container {
+	|                                                    |          display: flex;
+	|                                                    |        }
+	|                                                    |
+	|                                                    |
+
+	|                                                    |
+	+----------------------------------------------------+
+
+
+When the content exceeds the DOM container, we can use overflow scroll to make the content scroll inside the container. But this scroll wont have the momentum scrolling which common in the touch device. We need to add he  the webkit scrolling to enable the momentum scrolling.

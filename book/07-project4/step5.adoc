@@ -1,0 +1,118 @@
+== Step 5: Drawing the chart
+
+In this task, we draw the chart by using canvas.
+
+=== Time for Action
+
+1. We add the `#chart1-canvas` and `#chart2-canvas` id to the canvas, so that our JavaScript logic can reference them.
++
+.index.html
+[source,html]
+----
+<div class='charts container'>
+  <div><canvas id="chart1-canvas" width="300" height="150"></canvas></div>
+  <div><canvas id="chart2-canvas" width="300" height="150"></canvas></div>
+</div>
+----
+
+2. The chart logic is encapsulated into the `chart.coffee` file.
++
+.chart.coffee
+[source,coffeescript]
+----
+this.app ?= {}
+
+# alias
+cjs = createjs
+
+class this.app.Chart
+  # Entry point.
+  constructor: (canvasId)->
+    @stage = new cjs.Stage(canvasId)
+
+    utility.retinalize @stage, false
+    @canvasWidth = utility.originalCanvasWidth
+
+  drawChart: (value) ->
+    @stage.removeAllChildren()
+    # each tile = 10K km2
+    areaForEachTile = 100
+    tileWidth = tileHeight = 10
+    margin = 5
+    numberOfTiles = value / areaForEachTile
+    cols = Math.floor((@canvasWidth-margin) / (tileWidth + margin))
+
+    for i in [0...numberOfTiles]
+      x = margin + Math.floor(i % cols) * (tileWidth + margin)
+      y = margin + Math.floor(i / cols) * (tileHeight + margin)
+      shape = new RectShape
+        fillColor: 'ORANGERED'
+        width: tileWidth
+        height: tileHeight
+        x: x
+        y: y
+      @stage.addChild shape
+
+    # Draw on canvas
+    @stage.update()
+----
+
+3. In the `handleListChange` function in view, we update the code to call the chart to draw the value.
++
+.view.coffee
+[source,coffeescript]
+----
+this.app.handleListChange = (chart1, chart2)->
+  # Toggle Chart 1
+  $('input[type="radio"]').change ->
+    value = $('input[type="radio"]:checked').val()
+    $('.output1').text(Math.round(value))
+    chart1.drawChart(value)
+
+  # Toggle Chart 2
+  $('input[type="checkbox"]').change ->
+    sum = 0
+    $('input[type="checkbox"]:checked').each ->
+      sum += $(this).val()*1
+    $('.output2').text(Math.round(sum))
+    chart2.drawChart(sum)
+----
+
+4. Finally, we create the chart instance and tell the view to draw the chart after any input changes.
++
+.app.coffee
+[source,coffeescript]
+----
+chart1 = new app.Chart("chart1-canvas")
+chart2 = new app.Chart("chart2-canvas")
+
+this.app.handleListChange(chart1, chart2)
+----
+
+	<----------------+  canvas\_width +------------------------------------>
+	+--------------------------------------------------------------------+
+	|                                                                    |
+	|  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  |
+	|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+	|  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  |
+	|       ^                                                            |
+	|       |             ^ tile\_width                                   |
+	|       |                                                            |
+	|       +                                                            |
+	|      margin                                                        |
+	|                                                                    |
+	|                                                                    |
+	|                                                                    |
+	|                                                                    |
+	|                                                                    |
+	|   tiles\_per\_row = (canvas\_width - margin) / (tile\_width + margin)  |
+	|                                                                    |
+	|                                                                    |
+	|   x = index % tiles\_per\_row                                        |
+	|                                                                    |
+	|   y = Math.floor(index / tiles\_per\_row)                            |
+	|                                                                    |
+	|                                                                    |
+	|                                                                    |
+	|                                                                    |
+	+--------------------------------------------------------------------+

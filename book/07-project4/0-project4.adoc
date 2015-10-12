@@ -1,0 +1,55 @@
+:sectnums:
+= Project 4—Countries Area
+
+In this project, we create an app that draws a chart by using canvas and CreateJS.
+
+This example demonstrated both multiple select list and single item select list.
+
+The multiple select list is done via check box with array as name. The single item selection list is done by using the radio buttons.
+
+The beauty of using these two basic elements is that it works perfect without any css and Javascript. The css and Javascript is here to enhance the select list. But the core thing still works without these enhancement.
+
+
+== Why is this project awesome?
+
+This project you will learn to make momentum list. Learn to customize the radio and checkbox. Learn to draw basic chart using the create js library. Also learn to use flex box to create the entire app layout.
+
+The project is divided into the following steps.
+
+1. Building the app layout with flex
+2. Listing the countries data
+3. Basic list selection and calculation
+4. Styling the radio and checkbox list
+5. Drawing the chart
+6. Adding the info panel and global app style
+
+
+:sectnums!:
+include::mission-checklist.adoc[]
+
+include::project-preparation.adoc[]
+
+:sectnums:
+include::step1.adoc[]
+
+include::step2.adoc[]
+
+include::step3.adoc[]
+
+include::step4.adoc[]
+
+include::step5.adoc[]
+
+include::step6.adoc[]
+
+
+:sectnums!:
+
+//== Further challenges
+
+== Summary
+
+We learnt a lot in the chapter. We created a simple app that let user select countries and display their area in a tile bar chart. In conclusion, after reading this chapter, you should be able to:
+
+- Build app layout by using CSS flex box.
+- Draw basic chart by using canvas and CreateJS library.

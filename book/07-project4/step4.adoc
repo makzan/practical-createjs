@@ -1,0 +1,60 @@
+== Step 4: Styling the radio and checkbox list
+
+In this project, we customize the radio and checkbox styles.
+
+=== Time for Action
+
+1. All the customization are done is CSS. Add the following style in the `app.css` file.
++
+.app.css
+[source,css]
+----
+/* Styling Radio and Checkbox */
+input[type='radio'],
+input[type='checkbox']{
+  display: none;
+}
+
+input[type='radio'] + .name,
+input[type='checkbox'] + .name{
+  display: block;
+  font-size: 1rem;
+  padding: 1rem .5rem;
+  padding-left: 2rem;
+  border: 1px solid transparent;
+  border-left: 0;
+  border-right: 0;
+  transition: all .3s ease-out;
+}
+
+input[type='radio']:checked + .name,
+input[type='checkbox']:checked + .name{
+  border-color:DARKORANGE ;
+}
+
+/* Radio specific */
+input[type='radio'] + .name {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/15649/radio.svg) 10px 50% no-repeat;
+  background-size: 16px;
+}
+input[type='radio']:checked + .name {
+  background: SNOW url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/15649/radio-checked.svg) 10px 50% no-repeat;
+  background-size: 16px;
+}
+
+/* Checkbox specific */
+input[type='checkbox']:checked+.name {
+  background: SNOW url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/15649/checked.svg) 10px 50% no-repeat;
+  background-size: 16px;
+}
+----
+
+=== What just happened?
+
+We customize the radio and checkbooks by hiding the default browser rendered radio and checkbooks button. Then we use the label to customize the button graphic
+
+The label works because clicking in the label is identical to clicking on the input. That means when we click on the label, we are toggling the real radio boxes and check boxes.
+
+So we can define the :checked style in the css where we rely to customize our graphics
+
+We used the SVG format for the checkbox and radio box graphics. We could use png. The reason we use SVG is because the vector format scale better on the retina display and look sharper than using png format.
