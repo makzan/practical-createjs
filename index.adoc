@@ -7,19 +7,29 @@ v2.0, October 10, 2015: AsciiDoc Rewrite
 
 :leanpub: https://leanpub.com/practical-createjs/
 
-A short book about using CreateJS.
+A short book about using CreateJS with examples.
+
+== Where to buy
 
 Buy the book at {leanpub}[LeanPub].
 
-link:practical-createjs.html[One Page version]
+== Download eBook
 
-link:practical-createjs.pdf[PDF version]
+- link:practical-createjs.pdf[PDF version]
+- link:practical-createjs.epub[ePub version]
+- link:practical-createjs.mobi[Mobi version]
 
-link:practical-createjs.epub[ePub version]
+== Read Online
 
-link:practical-createjs.mobi[Mobi version]
+Read link:practical-createjs.html[One Page version].
 
-1. link:0-frontmatter.html[]
-2. link:0-preparation.html[]
-2. link:0-project1.html[]
-3. link:0-backmatter.html[]
+=== Ready by Chapters
+- link:0-frontmatter.html[Frontmatter]
+- link:0-preparation.html[Preparation]
+- link:0-project1.html[Project 1]
+- link:0-project1b.html[Project 1B]
+- link:0-project2.html[Project 2]
+- link:0-project3.html[Project 3]
+- link:0-project4.html[Project 4]
+- link:0-project4b.html[Project 4B]
+- link:0-backmatter.html[Backmatter]

@@ -21,4 +21,10 @@ include::book/04-project1b/0-project1b.adoc[leveloffset=+1]
 
 include::book/05-project2/0-project2.adoc[leveloffset=+1]
 
+include::book/06-project3/0-project3.adoc[leveloffset=+1]
+
+include::book/07-project4/0-project4.adoc[leveloffset=+1]
+
+include::book/08-project4b/0-project4b.adoc[leveloffset=+1]
+
 include::book/99-backmatter/0-backmatter.adoc[leveloffset=+1]
