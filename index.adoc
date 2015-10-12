@@ -3,9 +3,6 @@ Makzan <mak@makzan.net>
 v2.0, October 10, 2015: AsciiDoc Rewrite
 :doctype: book
 :docinfo:
-:toc: left
-:toclevels: 2
-:sectnums:
 :linkcss:
 
 A short book about using CreateJS.
