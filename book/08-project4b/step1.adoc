@@ -1,0 +1,106 @@
+== Animated Bar Chart
+
+There is not much difference in this project and previous project, in terms of app structure and logic flow. The main difference is in the `chart.coffee` where we draw different type of chart.
+
+1. We prepare the structure of `Chart` class.
++
+.chart.coffee
+[source,coffeescript]
+----
+this.app ?= {}
+
+# alias
+cjs = createjs
+Ease = cjs.Ease
+
+class this.app.Chart
+  # Entry point.
+  constructor: (canvasId)->
+    @stage = new cjs.Stage(canvasId)
+    cjs.Ticker.setFPS(60);
+    cjs.Ticker.addEventListener 'tick', @stage
+
+    utility.retinalize @stage, false
+    @canvasWidth = utility.originalCanvasWidth
+    @canvasHeight = utility.originalCanvasHeight
+    @initChart()
+
+  initChart: ->
+    @stage.removeAllChildren()
+    # other init chart code later
+
+  drawChart: (value, refValue = 0) ->
+    # draw the chart code later
+----
+
+2. When we init the chart, we create the rectangle shape and referencing line. They are put into `this` (`@`) scope for the `drawChart` to access.
++
+.chart.coffee
+[source,coffeescript]
+----
+initChart: ->
+    @stage.removeAllChildren()
+    margin = 5
+
+    @shape = new RectShape
+      fillColor: 'ORANGERED'
+      width: @canvasWidth - margin
+      height: 1
+      x: margin
+      y: @canvasHeight
+    @stage.addChild @shape
+    @refLine = new RectShape
+      fillColor: 'RED'
+      width: @canvasWidth - margin
+      height: 1
+      x: margin
+      y: @canvasHeight
+    @stage.addChild @refLine
+----
+
+3. We have drew the shape in the `initChart` method. The `drawChart` method is actually used to calculate the chart dimension based on the provided value. At last, we animate the shape to the target position and dimension by using TweenJS.
++
+.chart.coffee
+[source,coffeescript]
+----
+drawChart: (value, refValue = 0) ->
+    areaForEachTile = 100
+    scaleY = value / areaForEachTile
+    y = @canvasHeight - scaleY
+    cjs.Tween.get(@shape).to({scaleY, y}, 400, Ease.quartOut)
+
+    refY = @canvasHeight - (refValue / areaForEachTile)
+    cjs.Tween.get(@refLine).to({y: refY}, 400, Ease.quartOut)
+
+    # Draw on canvas
+    @stage.update()
+----
+
+3. We changed the `drawChart` method arguments. Now we need the reference value for positioning the reference line. So we update the view logic where it toggles the `drawChart` method.
++
+.view.coffee
+[source,coffeescript]
+----
+this.app.handleListChange = (chart1, chart2)->
+  # Toggle Chart 1 and 2
+  $('input[type="radio"], input[type="checkbox"]').change ->
+    # Chart 1
+    value = $('input[type="radio"]:checked').val()
+    $('.output1').text(Math.round(value))
+    chart1.drawChart(value)
+    # Chart 2
+    sum = 0
+    $('input[type="checkbox"]:checked').each ->
+      sum += $(this).val()*1
+    $('.output2').text(Math.round(sum))
+    chart2.drawChart(sum, value)
+----
+
+=== What just happened?
+
+We used the TweenJS the first time. Here is the syntax:
+
+[source,js]
+----
+craetejs.Tween.get(anyObject).to({property:newValue, …}, duration, easeFunction)
+----

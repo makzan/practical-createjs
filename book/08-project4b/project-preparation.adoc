@@ -1,0 +1,12 @@
+== Preparation
+
+In the `chart.coffee`, we have following alias declared for easier access to the CreateJS, TweenJS and the Ease library.
+
+.chart.coffee
+[source,coffeescript]
+----
+# alias
+cjs = createjs
+Ease = cjs.Ease
+Tween = cjs.Tween
+----

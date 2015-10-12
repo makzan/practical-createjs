@@ -1,0 +1,98 @@
+== Static pie chart
+
+1. There is only 1 pie chart. We change the HTML to contain 1 chart only.
++
+[source,html]
+.index.html
+----
+<div class='charts'>
+  <canvas id="chart-canvas" width="150" height="150"></canvas>
+</div>
+----
+2. We also center align the canvas.
++
+[source,css]
+.app.css
+----
+#chart-canvas {
+  display: block;
+  margin: auto;
+}
+----
+
+3. The pie chart is different from the bar chart we have created.
++
+[source,coffeescript]
+.chart.coffee
+----
+class this.app.Chart
+  # Entry point.
+  constructor: (canvasId)->
+    @stage = new cjs.Stage(canvasId)
+    cjs.Ticker.setFPS(60);
+    cjs.Ticker.addEventListener 'tick', @stage
+
+    utility.retinalize @stage, false
+    @canvasWidth = utility.originalCanvasWidth
+    @canvasHeight = utility.originalCanvasHeight
+    @initChart()
+  initChart: ->
+    @stage.removeAllChildren()
+
+  drawChart: (leftValue, rightValue) ->
+    x = @canvasWidth / 2
+    y = @canvasHeight / 2
+    r = 50
+
+    globalRotation = -90 * Math.PI / 180
+
+    percentage = rightValue / (leftValue + rightValue)
+    splitDegree = percentage * 360
+
+    #Arc 1
+    startAngle = 0 * Math.PI / 180 + globalRotation
+    endAngle = splitDegree * Math.PI / 180 + globalRotation
+    shape = new cjs.Shape()
+    shape.graphics
+      .beginFill "GOLD"
+      .moveTo(x, y)
+      .arc(x, y, r, startAngle, endAngle)
+      .lineTo(x, y)
+
+    @stage.addChild shape
+
+    # Arc 2
+    startAngle = splitDegree * Math.PI / 180 + globalRotation
+    endAngle = 360 * Math.PI / 180 + globalRotation
+
+    shape = new cjs.Shape()
+    shape.graphics
+      .beginFill "ORANGERED"
+      .moveTo(x, y)
+      .arc(x, y, r, startAngle, endAngle)
+      .lineTo(x, y)
+
+    @stage.addChild shape
+----
+
+4. We changed to 1 chart, so we also change the `handleListChange` method to toggle the chart with both values form left and right list.
++
+.view.coffee
+[source,coffeescript]
+----
+this.app.handleListChange = (chart)->
+  # Toggle Chart
+  $('input[type="radio"], input[type="checkbox"]').change ->
+    # Left
+    value = $('input[type="radio"]:checked').val()*1
+    $('.output1').text(Math.round(value))
+
+    # Right
+    sum = 0
+    $('input[type="checkbox"]:checked').each ->
+      sum += $(this).val()*1
+    $('.output2').text(Math.round(sum))
+
+    # Update Chart
+    chart.drawChart(value, sum)
+----

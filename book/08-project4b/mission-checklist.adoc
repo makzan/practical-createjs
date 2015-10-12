@@ -1,0 +1,6 @@
+== Mission Checklist
+
+1. Animated bar chart
+2. Animated tiles
+3. Pie chart
+4. Animated pie chart
