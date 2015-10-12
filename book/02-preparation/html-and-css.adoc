@@ -1,0 +1,27 @@
+== HTML and CSS
+:1: http://www.htmlandcssbook.com/
+:2: http://www.amazon.com/Jon-Duckett/e/B001IR3Q7I
+:3: http://learn.shayhowe.com/html-css/
+:4: http://www.shayhowe.com/about/
+:5: http://learnlayout.com/
+:6: http://learnlayout.com/about.html
+:7: http://learn.shayhowe.com/advanced-html-css/
+:8: http://www.shayhowe.com/about/
+
+Here is a list of resources if you need to get started learning HTML and CSS, the browser technology that display information and formatting styles.
+
+- {1}[HTML and CSS book] by {2}[Jon Duckett].
++
+This book helps you learn the most basic web design skills from scratch. The book demonstrates web design technologies with useful graphs and code examples.
+
+- {3}[Learn to Code HTML & CSS] by {4}[Shay Howe].
++
+Shay Howe shows the essential techniques to craft your own web page. It’s easy to follow and you’ll learn the fundamentals to get started as web designer.
+
+- {5}[Learn CSS Layout] by {6}[Bocoup].
++
+There are many ways to lay out content in CSS. This website provides comprehensive reference on all major layout approaches.
+
+- {7}[Learn to Code Advanced HTML & CSS] by {8}[Shay Howe].
++
+After you get familiar with basic HTML and CSS, you may read this resource that will take you to the next level of web design.

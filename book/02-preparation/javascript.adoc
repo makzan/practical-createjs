@@ -1,0 +1,39 @@
+== JavaScript
+:1: http://learn.jquery.com/javascript-101/
+:2: http://learn.jquery.com
+:3: http://eloquentjavascript.net
+:4: https://marijnhaverbeke.nl
+:5: http://www.javascriptbook.com
+:6: http://www.amazon.com/Jon-Duckett/e/B001IR3Q7I
+:7: http://www.thinkful.com/learn/javascript-best-practices-1/
+:8: http://www.thinkful.com
+:9: http://jstherightway.org
+:10: https://github.com/gnuwilliam
+:11: http://shop.oreilly.com/product/9780596517748.do
+:12: https://plus.google.com/+DouglasCrockfordEsq/posts
+
+We use a lot of JavaScript in this book. All the interaction and  canvas graphics are done via script. Here are several resources that worth reading.
+
+- {1}[JavaScript and jQuery 101] by {2}[jQuery].
++
+The jQuery learning center contains detail guides to learn the concept of JavaScript and jQuery. It’s a good place to reference different object types. It also teaches you the jQuery concept and essential code.
+
+- {3}[Eloquent JavaScript] by {4}[Marijn Haverbeke].
++
+This is a must have book if you want to learn JavaScript inside out. It covers the JavaScript programming for both client-side and browser-side.
+
+- {5}[JavaScript book] by {6}[Jon Duckett].
++
+Jon Duckett has the ability to present programming skills in an easy-to-follow way. This JavaScript book demonstrates how JavaScript and jQuery works in beautiful and useful illustrations and charts.
+
+- {7}[JavaScript Best Practices] by {8}[Thinkful].
++
+JavaScript can be evil if writing it badly. JavaScript Best Practices show different tricks to write maintainable and less buggy code.
+
+- {9}[JavaScript: The Right Way] by {10}[William Oliveira].
++
+This is a big list of JavaScript resources containing latest  practices and modern libraries.
+
+- {11}[JavaScript: The Good Part] by {12}[Douglas Crockford].
++
+This book shows the beauty part of JavaScript. It presents the readers how JavaScript is different than the traditional object-oriented programming languages. JavaScript has its own way to write OOP.

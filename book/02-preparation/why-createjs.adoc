@@ -1,0 +1,36 @@
+== Warming up
+
+Before we go into the project, let’s do some warm ups to make ourselves familiar with the development workflow.
+
+
+=== Why CreateJS?
+
+There are so many HTML5 game libraries out there. Why I choose CreateJS?
+
+It is not a game engine. It is a library that takes graphics and animation drawing its main priority. Just like every one used Flash to make game, but still other creatives used Flash to build interactive applications. This is the same while using the CreateJS.
+
+As a bonus, CreateJS integrates deeply in Adobe Flash. This allows us to create and export timeline-based animation to CreateJS’ canvas drawing JavaScript directly. That’s a very handy workflow if you use it probably.
+
+=== Quick demo—advertisement animation
+
+Here is a quick demo to show how Adobe Flash exports an advertisement animation and plays in HTML5 with CreateJS. The following example is the classic tween animation directly exported from Flash. I didn’t edit the output code.
+
+![Classic tween transition](images/whycreatejs-timeline.png)
+
+How we make use of the generated code in our CreateJS project? We can instantiate the exported object add add it to the display list. The object name follows the name we set in the Flash IDE, either the linked class name or the library name. Then we can just add it to the CreateJS hierarchy by as using a normal Sprite object.
+
+
+After we include the exported JavaScript file into our project, we can add the movieclip from the `.fla` library to the canvas display list by using the following code snippet. Here we assumed the clip name in Flash library is called `ExampleSprite`.
+
+----
+var sprite = new ExampleSprite();
+this.stage.addChild(sprite);
+----
+
+image:images/flash-ad.png[Canvas output of Flash ad]
+
+A\> This example code adds the exported animation on the stage for demonstration purpose. In your project, you may want to add the animation to the display list hierarchy.
+
+I have created a video demonstrating the process to make this advertisement and export the animation to CreateJS. You can find the video in the following link.
+
+https://vimeo.com/109987674[http://mak.la/ad-demo]

@@ -1,0 +1,21 @@
+== Example projects
+
+I like to learn via practical projects. That’s why I make this book full of example projects that you can follow and modify them to fit into your real world projects.
+
+We will build the following projects.
+
+- **Project 1**: Basic app with animated transitions
++
+In this project, we build a very basic canvas based app. The app demonstrates how we can create animated transition.
+
+- **Project 1B**: DOM-based app with animated transitions
++
+In this project, we modify the project 1 to make all the content an HTML DOM element. This allows the content to be accessible and yet we keep the animation in Canvas.
+
+- **Project 2**: Rain or Not?
++
+In this project, we separate the code into MVC model. That is dividing the code into Modal (Data), View and Controller modules. We also listen to the gyroscope in the mobile device to create a subtle motion parallax offset effect.
+
+- **Project 3**: Our solar system
+
+- **Project 4**: Drawing charts

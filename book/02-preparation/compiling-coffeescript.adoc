@@ -1,0 +1,21 @@
+== CoffeeScript compiling tools
+
+When we write the logic in CoffeeScript, we need to compile them into JavaScript. You can choose your own method to compile the `.coffee` file into `.js`. Some compilers suggestion lists here in case you don’t have a favorite one yet.
+
+- GruntJS
++
+GruntJS is a command line task runner for JavaScript. It allows developer to define how some inputs can be manipulated and transformed into the destination files.
+
+
+- GulpJS
++
+GulpJS provides Grunt-similar task runner. The different is that GulpJS uses the concept of pipeline. That means we can write the tasks in cleaner way by ‘chaining’ the tasks.
+
+
+- LiveReload
++
+LiveReload is a GUI tool that provides several handy features. It auto refreshes the browser when you save you files. It also compiles the preprocessor files for you, including CoffeeScript, SCSS and more.
+
+- CodeKit
++
+CodeKit is another GUI tool with similar features from LiveReload. It is mac only and provides shortcut to install commonly-used libraries into your projects.

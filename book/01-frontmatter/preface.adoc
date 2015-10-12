@@ -1,0 +1,18 @@
+== Preface
+
+This book focuses on building canvas-based application and games with the CreateJS suite. The gap between web application and native application is not as big as usual, thanks to the performance boost of the browser engine and the device processing power. By using web technologies in app development, we can benefit from the flexibility of web programming. Canvas and CreateJS allows us to go beyond static display. By combining the DOM elements and rich media rendering in canvas, we can provide immersive experience to our users.
+
+Do keep in mind that we are never locked to any technology. Canvas based animation can works well together with the CSS animation and transition. We can also go for the hybrid approach by making use of the native navigation together with the high performance web view to render our content.
+
+Hope you enjoy the book examples and go further by creating your rich interactive applications.
+
+
+=== Code Example
+
+You can find the code example in the following GitHub repository.
+
+http://mak.la/cjs-examples
+
+You can git clone the project to your machine so that you can update the code by using git commands. Alternatively, you may click “Download Zip” to download the whole bundle.
+
+image:images/download-source-code.png[Download source code]

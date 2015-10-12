@@ -11,3 +11,9 @@ v2.0, October 10, 2015: AsciiDoc Rewrite
 A short book about using CreateJS.
 
 include::book/01-frontmatter/0-frontmatter.adoc[leveloffset=+1]
+
+include::book/02-preparation/0-preparation.adoc[leveloffset=+1]
+
+include::book/03-project1/0-project1.adoc[leveloffset=+1]
+
+include::book/99-backmatter/0-backmatter.adoc[leveloffset=+1]

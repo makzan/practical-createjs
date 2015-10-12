@@ -1,0 +1,9 @@
+== Pre-Request
+:1: https://developer.mozilla.org
+:2: https://stackoverflow.com
+
+This book assumes you have basic knowledge of client-side web development techniques. In order to follow the examples, you need to know basic HTML and CSS. You’ll learn some intermediate JavaScript programming skills too, but knowing some fundamental JS would be great.
+
+NOTE: Searching online is helpful when you have questions on web issues. If you need reference on using the web standards, I recommend checking the {1}[Mozilla Developer Network] for reference and {2}[StackOverflow] for questions and issues.
+
+The following is a list of online resource that you may learn yourself alongside the book examples.
