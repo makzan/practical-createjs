@@ -4,7 +4,6 @@
 In this project, we improve the *Project 1* to make all the content accessible by the browsers.
 
 
-
 :sectnums!:
 include::mission-checklist.adoc[]
 
@@ -24,6 +23,6 @@ include::step5.adoc[]
 include::step6.adoc[]
 
 
-:sectnums!:
+// :sectnums!:
 
 // == Further challenges

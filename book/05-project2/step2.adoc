@@ -1,0 +1,26 @@
+## 2. Data module
+
+The data logic is responsible to fetch the data from the source and parse the data.
+
+
+
+### Time for Action
+
+1. We create a new class for the Data module.
+
+	{title="app.coffee"}
+		class Data
+		  constructor: ->
+		    @api = 'http://api.openweathermap.org/data/2.5/weather?q=Macao,MO'
+		  fetch: (callback) ->
+
+		    $.getJSON @api, (data) ->
+		      console.log(data)
+
+		      code = data.weather[0].id + "" # force to string
+
+		      # rainy code all start at 5
+		      if code[0] == '5'
+		        callback(true)
+		      else
+		        callback(false)

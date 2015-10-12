@@ -1,4 +1,4 @@
-== Step 3. Defining scene as container inheritance
+== Step 3: Defining scene as container inheritance
 In this step, we define the Scene class which every page view builds on top of it.
 
 === Time for Action—Defining the Scene class

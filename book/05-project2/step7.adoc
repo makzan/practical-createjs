@@ -1,0 +1,28 @@
+
+## 7. Aligning with FlexBox
+
+Flexbox is the next hot topic on layout. It’s draft was first published in 2009 and has reach a relatively stable status now, after 5 years of discussions and name changes.
+
+In the step, we will make the app frame a flexbox container and layout our user interface elements at the center of the screen, vertically.
+
+
+
+### Time for action
+
+1. Add the following to the CSS to make the items align center vertically.
+
+	{title="app.css"}
+		/* Flexbox */
+		html, body, #app, .page {
+		  height: 100%;
+		}
+		.page {
+		  flex-direction: column;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		}
+
+I recommend reading the [full guide to FlexBox](http://css-tricks.com/snippets/css/a-guide-to-flexbox/). Or you may check the latest working draft on W3C website.
+
+http://www.w3.org/TR/css-flexbox-1/

@@ -1,152 +1,178 @@
-## 2. Page Transition Manager
+== Step 2: Page Transition Manager
 
 In this step, we control our `.page` DOM elements by a `PageManager`.
 
-### Preparation
+=== Preparation
 
 We need to modify the scenes management. It was controlling the `DisplayObject` in CreateJS canvas. Now we need to control the DOM elements. I changed the class from `SceneManager` to `PageManager` to make the code less confusing. The structure will be the same as what we had in canvas-based scenes manager.
 
-	class app.PageManager
-	  constructor: (@stage)->
-	    # init the pages
-	  lastScene: ->
-	    # return last scene
-	  resetWithScene: (scene) ->
-	    # reset scene
-	  popScene: ->
-	    # remove the last scene
-	  pushScene: (scene)->
-	    # show the given scene
-	  pushSceneWithTransition: (scene, transitionClassName) ->
-	    # show the given scene with transition
+[source,coffeescript]
+----
+class app.PageManager
+  constructor: (@stage)->
+    # init the pages
+  lastScene: ->
+    # return last scene
+  resetWithScene: (scene) ->
+    # reset scene
+  popScene: ->
+    # remove the last scene
+  pushScene: (scene)->
+    # show the given scene
+  pushSceneWithTransition: (scene, transitionClassName) ->
+    # show the given scene with transition
+----
 
 
 
-
-### Time for Action
+=== Time for Action
 
 1. First, we work on the CSS. Each page is absolute positioned
++
+.app.css
+[source,css]
+----
+/* canvases sit inside the #app frame. It’s similar to layers. */
+#app {
+  position: relative;
+}
+#app > canvas {
+  position: fixed;
+  display: none; /* default hide until we use it */
+  z-index: 999;
+}
 
-	{title="app.css"}
-		/* canvases sit inside the #app frame. It’s similar to layers. */
-		#app {
-		  position: relative;
-		}
-		#app > canvas {
-		  position: fixed;
-		  display: none; /* default hide until we use it */
-		  z-index: 999;
-		}
-
-		/* Page related */
-		.page {
-		  width: 100%;
-		  height: 100%;
-		  position: absolute;
-		}
+/* Page related */
+.page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+----
 
 2. By default, we hide all the `.page`. The first page will be added from the `resetWithScene` method.
++
+.page-manager.coffee
+[source,coffeescript]
+----
+constructor: (@stage)->
+    @scenes = []
+    $('.page').hide()
 
-	{title="page-manager.coffee"}
-		constructor: (@stage)->
-		    @scenes = []
-		    $('.page').hide()
+    # register clicks on all pages
+    $('a[href^="#"]').click (event) =>
+      pageId = $(event.currentTarget).attr('href')
 
-		    # register clicks on all pages
-		    $('a[href^="#"]').click (event) =>
-		      pageId = $(event.currentTarget).attr('href')
+      # when it's link to #, it is a back transition
+      pageId = '.page:first' if pageId == '#'
 
-		      # when it's link to #, it is a back transition
-		      pageId = '.page:first' if pageId == '#'
+      transition = $(event.currentTarget).data('transition')
 
-		      transition = $(event.currentTarget).data('transition')
-
-		      @pushSceneWithTransition $(pageId), transition
+      @pushSceneWithTransition $(pageId), transition
+----
 
 3. The `lastScene` returns the last element of the `scenes` array.
-
-	{title="page-manager.coffee"}
-		lastScene: -> @scenes[@scenes.length-1]
++
+.page-manager.coffee
+[source,coffeescript]
+----
+lastScene: -> @scenes[@scenes.length-1]
+----
 
 4. In the `resetScene` method, we reset the scenes array and use jQuery to show the given scene.
++
+.page-manager.coffee
+[source,coffeescript]
+----
+resetWithScene: (scene) ->
+  @scenes.length = 0
+  @scenes.push scene
 
-	{title="page-manager.coffee"}
-		resetWithScene: (scene) ->
-		  @scenes.length = 0
-		  @scenes.push scene
-
-		  $(scene).show()
+  $(scene).show()
+----
 
 5. When we remove scene, we don’t actually remove the scene like we did in canvas. Instead, we hide the DOM element of the scene.
-
-	{title="page-manager.coffee"}
-		popScene: ->
-		  $(scene).hide()
-		  @scenes.pop()
++
+.page-manager.coffee
+[source,coffeescript]
+----
+popScene: ->
+  $(scene).hide()
+  @scenes.pop()
+----
 
 6. In DOM elements, we control the DOM’s visibility. So pushing a scene means we hide the last one and show the given one. The browser may be scrolled in the last scene, that’s why we reset the scroll position.
++
+.page-manager.coffee
+[source,coffeescript]
+----
+pushScene: (scene)->
+    $(@lastScene()).hide()
+    @scenes.push scene
+    $(scene).show()
 
-	{title="page-manager.coffee"}
-		pushScene: (scene)->
-		    $(@lastScene()).hide()
-		    @scenes.push scene
-		    $(scene).show()
-
-		    # reset the scroll
-		    $(window).scrollTop(0)
+    # reset the scroll
+    $(window).scrollTop(0)
+----
 
 7. Here comes the core part, transition. The transition is still controlled by canvas. During the control of the DOM visibility, we show the canvas animation and hide the canvas after the transition completed.
++
+.page-manager.coffee
+[source,coffeescript]
+----
+pushSceneWithTransition: (scene, transitionClassName='TransitionAnimationB') ->
+  transition = new lib[transitionClassName]()
 
-	{title="page-manager.coffee"}
-		  pushSceneWithTransition: (scene, transitionClassName='TransitionAnimationB') ->
-		  transition = new lib[transitionClassName]()
+  # The demension follows the Flash canvas dimension
+  transition.x = 300/2
+  transition.y = 400/2
+  $('#app-canvas').show()
 
-		  # The demension follows the Flash canvas dimension
-		  transition.x = 300/2
-		  transition.y = 400/2
-		  $('#app-canvas').show()
+  transition.on 'sceneShouldChange', =>
+    @pushScene scene
 
-		  transition.on 'sceneShouldChange', =>
-		    @pushScene scene
+  transition.on 'transitionEnded', ->
+    $('#app-canvas').hide()
 
-		  transition.on 'transitionEnded', ->
-		    $('#app-canvas').hide()
-
-		  @stage.addChild transition
+  @stage.addChild transition
+----
 
 8. Let’s make use of the page transition. We change the `app.coffee` to the following code.
++
+.app.coffee
+[source,coffeescript]
+----
+# a global app object.
+this.exampleApp ?= {}
 
-	{title="app.coffee"}
-		# a global app object.
-		this.exampleApp ?= {}
+# alias
+cjs = createjs
+setting = this.exampleApp.setting
+app = this.exampleApp
 
-		# alias
-		cjs = createjs
-		setting = this.exampleApp.setting
-		app = this.exampleApp
+class App
+  # Entry point.
+  constructor: ->
+    console.log "Welcome to my portfolio."
 
-		class App
-		  # Entry point.
-		  constructor: ->
-		    console.log "Welcome to my portfolio."
+    @canvas = document.getElementById("app-canvas")
+    @stage = new cjs.Stage(@canvas)
 
-		    @canvas = document.getElementById("app-canvas")
-		    @stage = new cjs.Stage(@canvas)
+    cjs.Ticker.setFPS 60
+    cjs.Ticker.addEventListener "tick", @stage # make sure the stage refresh drawing for every frame.
 
-		    cjs.Ticker.setFPS 60
-		    cjs.Ticker.addEventListener "tick", @stage # make sure the stage refresh drawing for every frame.
+    app.sceneManager = new app.PageManager(@stage)
+    app.sceneManager.resetWithScene $('.page:first')
 
-		    app.sceneManager = new app.PageManager(@stage)
-		    app.sceneManager.resetWithScene $('.page:first')
+new App()
+----
 
-		new App()
-
-### What just happened?
+=== What just happened?
 
 We created the page transition manager that is very similar to our previous scene manager. The only difference is that page manager handles `.page` DOM element and scene manager handles CreateJS container.
 
 
 
-### Improvement
+=== Improvement
 
 We have reset the scroll position during scenes transition. In future, we may store the scroll position of each scene, so that we can resume the previous scroll position when popping to the last scene.

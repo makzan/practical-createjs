@@ -1,4 +1,4 @@
-== Step 1. Setting up the project and GulpJS
+== Step 1: Setting up the project and GulpJS
 
 In this step, we prepare the compiling environment for our project.
 

@@ -1,4 +1,4 @@
-== Step 4. Adding static stylish menu
+== Step 4: Adding static stylish menu
 
 In this step, we implement the menu scene and put menu item on it.
 

@@ -1,42 +1,48 @@
-## 3. Positioning the canvas transition
+== Step 3: Positioning the canvas transition
 
-### Time for Action
+=== Time for Action
 
 1. In the `retinalize.coffee` file, we add a `setFullScreen` function that scales the canvas to fit the window dimension.
++
+.retinalize.coffee
+[source,coffeescript]
+----
+# a global app object.
+this.exampleApp ?= {}
 
-	{title="retinalize.coffee"}
-		# a global app object.
-		this.exampleApp ?= {}
+setting = this.exampleApp.setting
 
-		setting = this.exampleApp.setting
+this.utility ?= {}
 
-		this.utility ?= {}
+this.utility.setFullScreen = (canvas, stage) ->
+  canvas.setAttribute 'width', $(window).width()
+  canvas.setAttribute 'height', $(window).height()
+  setting.width = $(window).width()
+  setting.height = $(window).height()
 
-		this.utility.setFullScreen = (canvas, stage) ->
-		  canvas.setAttribute 'width', $(window).width()
-		  canvas.setAttribute 'height', $(window).height()
-		  setting.width = $(window).width()
-		  setting.height = $(window).height()
-
-		  # 300 is the original Flash canvas width
-		  stage.scaleX = stage.scaleY = setting.width / 300
+  # 300 is the original Flash canvas width
+  stage.scaleX = stage.scaleY = setting.width / 300
+----
 
 2. In our app’s entry point, we invoke the `setFullScreen` function for the first time and register it to be run every time when the window resizes.
++
+.app.coffee
+[source,coffeescript]
+----
+class App
+  # Entry point.
+  constructor: ->
+    console.log "Welcome to my portfolio."
 
-	{title="app.coffee"}
-		class App
-		  # Entry point.
-		  constructor: ->
-		    console.log "Welcome to my portfolio."
+    @canvas = document.getElementById("app-canvas")
+    @stage = new cjs.Stage(@canvas)
 
-		    @canvas = document.getElementById("app-canvas")
-		    @stage = new cjs.Stage(@canvas)
+    leanpub-start-insert
+    utility.setFullScreen(@canvas, @stage)
 
-		    leanpub-start-insert
-		    utility.setFullScreen(@canvas, @stage)
+    window.onresize = =>
+      utility.setFullScreen(@canvas, @stage)
+    leanpub-end-insert
 
-		    window.onresize = =>
-		      utility.setFullScreen(@canvas, @stage)
-		    leanpub-end-insert
-
-		    ...
+    ...
+----

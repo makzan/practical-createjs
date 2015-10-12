@@ -1,4 +1,4 @@
-== Step 6. Animating transition between scenes
+== Step 6: Animating transition between scenes
 
 In this step, we make use of the exported Flash animation to build the animated transition effect.
 

@@ -1,35 +1,38 @@
-## 5. Fine tuning the styles
+== Step 5: Fine tuning the styles
 
-### Time for Action
+=== Time for Action
 
 1. In the `app.css`, we add some more styles to make the app looks nice.
++
+.app.css
+[source,css]
+----
+#info-link {
+  position: fixed;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+}
 
-	{title="app.css"}
-		#info-link {
-		  position: fixed;
-		  bottom: -5px;
-		  left: 0;
-		  width: 100%;
-		}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
 
-		.header {
-		  position: fixed;
-		  top: 0;
-		  left: 0;
-		  width: 100%;
-		}
+.non-collapse-content {
+  margin-top: 25%;
+}
 
-		.non-collapse-content {
-		  margin-top: 25%;
-		}
+p {
+  padding: 1rem;
+}
 
-		p {
-		  padding: 1rem;
-		}
-
-		#main-list {
-		  padding-bottom: 100px;
-		}
-		#main-list li {
-		  margin-top: -11%;
-		}
+#main-list {
+  padding-bottom: 100px;
+}
+#main-list li {
+  margin-top: -11%;
+}
+----

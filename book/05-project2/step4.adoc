@@ -1,0 +1,46 @@
+## 4. View
+
+Defining the CSS styles.
+
+	.loading {
+	  background-image: url(../images/loading.png) center center no-repeat;
+	}
+
+	.sunny {
+	  background: #B8DCF1
+	}
+	.rainy {
+	  background: #9FB6C4;
+	}
+
+The main view that controls DOM elements and the more-specific View objects, such as `Background` and `CanvasView`
+
+	class View
+	  constructor: ->
+	    $('.status').hide()
+	    $('.description').hide()
+
+	    @canvasView = new CanvasView()
+	    @canvasView.reset()
+	    @background = new Background()
+	  update: (is_rainy=true)->
+	    $('.loading').removeClass('loading')
+	    @canvasView.moveIn()
+	    if is_rainy
+	      $('.rainy-only').show()
+	      $('.sunny-only').hide()
+	      @canvasView.showRainy()
+	      @background.setRainyBackground()
+	    else
+	      $('.rainy-only').hide()
+	      $('.sunny-only').show()
+	      @canvasView.showSunny()
+	      @background.setSunnyBackground()
+
+Controlling the Background
+
+	class Background
+	  constructor: ->
+	    @element = $('body')
+	  setSunnyBackground: -> @element.addClass('sunny')
+	  setRainyBackground: -> @element.addClass('rainy')

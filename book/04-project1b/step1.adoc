@@ -1,108 +1,126 @@
-## 1. Defining DOM elements
+== Step 1: Defining DOM elements
 
 
-### Time for Action
+=== Time for Action
 
 1. In our `index.html` we had the canvas inside the `#app` DIV. We will add new DOM elements after this canvas tag, for each page of content.
-
-	{title="index.html"}
-		<div id="app">
-		  <canvas id="app-canvas" width="300" height="400"></canvas>
-		  <!-- We will add each page of content from here -->
-		</div>
++
+.index.html
+[source,html]
+----
+<div id="app">
+  <canvas id="app-canvas" width="300" height="400"></canvas>
+  <!-- We will add each page of content from here -->
+</div>
+----
 
 2. First, we add the main menu page. Add the following `#main` DIV after our canvas.
-
-	{title="index.html"}
-		<div id="app">
-		  <canvas id="app-canvas" width="300" height="400"></canvas>
-		  leanpub-start-insert
-		  <div id="main" class="page">
-		    <div class='header'>
-		      <img src="images/header.png" alt="Header">
-		    </div>
-		    <ul id="main-list" class='non-collapse-content'>
-		      <li><a href="#detail-page"><img src='images/a.png' alt='Photo A'></a></li>
-		      <li><a href="#detail-page"><img src='images/b.png' alt='Photo B'></a></li>
-		      <li><a href="#detail-page"><img src='images/c.png' alt='Photo C'></a></li>
-		      <!-- Feel free to add more list items here -->
-		    </ul>
-		    <div id="info-link">
-		      <a href="#info-page" data-transition="TransitionAnimationA"><img src='images/info.png' alt='Link to Info'></a>
-		    </div>
-		  </div>
-		  leanpub-end-insert
-		</div>
++
+.index.html
+[source,html]
+----
+<div id="app">
+  <canvas id="app-canvas" width="300" height="400"></canvas>
+  leanpub-start-insert
+  <div id="main" class="page">
+    <div class='header'>
+      <img src="images/header.png" alt="Header">
+    </div>
+    <ul id="main-list" class='non-collapse-content'>
+      <li><a href="#detail-page"><img src='images/a.png' alt='Photo A'></a></li>
+      <li><a href="#detail-page"><img src='images/b.png' alt='Photo B'></a></li>
+      <li><a href="#detail-page"><img src='images/c.png' alt='Photo C'></a></li>
+      <!-- Feel free to add more list items here -->
+    </ul>
+    <div id="info-link">
+      <a href="#info-page" data-transition="TransitionAnimationA"><img src='images/info.png' alt='Link to Info'></a>
+    </div>
+  </div>
+  leanpub-end-insert
+</div>
+----
 
 3. Next, we add the `#detail-page` after the mail page. You may add other page if needed.
-
-	{title="index.html"}
-		<div id="app">
-		  <canvas id="app-canvas" width="300" height="400"></canvas>
-		  <div id="main" class="page">...</div>
-		  leanpub-start-insert
-		  <div id="detail-page" class="page">
-		    <a href="#" class='header'><img src='images/header-back.png' alt='Back to main'></a>
-		    <img src='images/photo-a.png' alt='Detail of Photo A'>
-		    <p>Here is a photo from Unsplash. The photo is free for commercial use. I put it here just for the app example. The photo was taken by Ben Moore.</p>
-		    <div id="info-link">
-		      <a href="#info-page" data-transition="TransitionAnimationA"><img src='images/info.png' alt='Link to Info'></a>
-		    </div>
-		  </div>
-		  leanpub-end-insert
-		</div>
++
+.index.html
+[source,html]
+----
+<div id="app">
+  <canvas id="app-canvas" width="300" height="400"></canvas>
+  <div id="main" class="page">...</div>
+  leanpub-start-insert
+  <div id="detail-page" class="page">
+    <a href="#" class='header'><img src='images/header-back.png' alt='Back to main'></a>
+    <img src='images/photo-a.png' alt='Detail of Photo A'>
+    <p>Here is a photo from Unsplash. The photo is free for commercial use. I put it here just for the app example. The photo was taken by Ben Moore.</p>
+    <div id="info-link">
+      <a href="#info-page" data-transition="TransitionAnimationA"><img src='images/info.png' alt='Link to Info'></a>
+    </div>
+  </div>
+  leanpub-end-insert
+</div>
+----
 
 4. Finally, we add the `#info-page`. Please note that we have replaced the text image into real text.
-
-	{title="index.html"}
-		<div id="app">
-		  <canvas id="app-canvas" width="300" height="400"></canvas>
-		  <div id="main" class="page">...</div>
-		  <div id="detail-page" class="page">...</div>
-		  leanpub-start-insert
-		  <div id="info-page" class="page">
-		    <a href="#" class='header'><img src='images/header-back.png' alt='Back to main'></a>
-		    <div class='non-collapse-content'>
-		      <p>This is an example app that serves as the 1st chapter of my book – Rich Interactive App Development with CreateJS. This example demonstrates a custom animated transition. It lacks some essential features but this is just for the chapter 1. More features coming in future chapter.</p>
-		      <p>This example is bought to you by Makzan. He has written three books and one video course on building a Flash virtual world and creating games with HTML5 and the latest web standards. He is currently teaching courses in Hong Kong and Macao SAR.</p>
-		    </div>
-		  </div>
-		  leanpub-end-insert
-		</div>
++
+.index.html
+[source,html]
+----
+<div id="app">
+  <canvas id="app-canvas" width="300" height="400"></canvas>
+  <div id="main" class="page">...</div>
+  <div id="detail-page" class="page">...</div>
+  leanpub-start-insert
+  <div id="info-page" class="page">
+    <a href="#" class='header'><img src='images/header-back.png' alt='Back to main'></a>
+    <div class='non-collapse-content'>
+      <p>This is an example app that serves as the 1st chapter of my book – Rich Interactive App Development with CreateJS. This example demonstrates a custom animated transition. It lacks some essential features but this is just for the chapter 1. More features coming in future chapter.</p>
+      <p>This example is bought to you by Makzan. He has written three books and one video course on building a Flash virtual world and creating games with HTML5 and the latest web standards. He is currently teaching courses in Hong Kong and Macao SAR.</p>
+    </div>
+  </div>
+  leanpub-end-insert
+</div>
+----
 
 5. Before we move on, we add some basic styles. It replaces the CSS file from _project 1_.
++
+.app.css
+[source,css]
+----
+ul {
+  list-style: none;
+}
 
-	{title="app.css"}
-		ul {
-		  list-style: none;
-		}
+img {
+  width: 100%;
+  border: 0;
+}
 
-		img {
-		  width: 100%;
-		  border: 0;
-		}
+/* canvases sit inside the #app frame. It’s similar to layers. */
+#app {
+  position: relative;
+}
+#app > canvas {
+  position: fixed;
+  display: none; /* default hide until we use it */
+  z-index: 999;
+}
+----
 
-		/* canvases sit inside the #app frame. It’s similar to layers. */
-		#app {
-		  position: relative;
-		}
-		#app > canvas {
-		  position: fixed;
-		  display: none; /* default hide until we use it */
-		  z-index: 999;
-		}
-
-### What just happened?
+=== What just happened?
 
 We are building the project of Jack Portfolio from scratch. We use DIV with `.page` class to indicate one page of content. They are all added into `#app` element.
 
 Here is the new `#app` DOM structure.
 
-	<div id="app">
-	  <canvas id="app-canvas" width="300" height="400"></canvas>
-	  <div id="main" class="page">...</div>
-	  <div id="detail-page" class="page">...</div>
-	  <div id="info-page" class="page">...</div>
-	</div>
+[source,html]
+----
+<div id="app">
+  <canvas id="app-canvas" width="300" height="400"></canvas>
+  <div id="main" class="page">...</div>
+  <div id="detail-page" class="page">...</div>
+  <div id="info-page" class="page">...</div>
+</div>
+----
 
 The HTML is designed to be used without any JavaScript and fancy transition effect. All the links between content are based on the hash anchors. User can still view and link to different part of the content with neither canvas support nor JavaScript support.

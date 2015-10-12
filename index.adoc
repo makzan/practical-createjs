@@ -5,7 +5,11 @@ v2.0, October 10, 2015: AsciiDoc Rewrite
 :docinfo:
 :linkcss:
 
+:leanpub: https://leanpub.com/practical-createjs/
+
 A short book about using CreateJS.
+
+Buy the book at {leanpub}[LeanPub].
 
 link:practical-createjs.html[One Page version]
 

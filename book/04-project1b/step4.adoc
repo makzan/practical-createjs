@@ -1,0 +1,32 @@
+== Step 4: Falling back in old browser
+
+=== Time for Action
+
+1. We add a new file `old-browser.js` to fall back the logic to basic HTML anchors navigation when the reader’s browser doesn’t support Canvas.
++
+.old-browser.js
+[source,js]
+----
+(function(){
+  // Check if canvas is supported
+  isCanvas2DSupported = !!window.CanvasRenderingContext2D;
+
+  // Give up all logic
+  if(!isCanvas2DSupported) {
+    // remove .page styles
+    $('.page').removeClass();
+  }
+}).call(this);
+----
+
+2. We include the `old-browser.js` file right after the loading of jQuery and before loading our logic.
++
+.index.html
+[source,html]
+----
+<script src="scripts/old-browser.js"></script>
+----
+
+=== What’s happening?
+
+We check if the browser supports the canvas. When the browser is too old to run canvas, we fall back to the step-1 which presents the content via browser hash link. This is done by removing all the `.page` class to force the scene transition and the `.page` styles not working.

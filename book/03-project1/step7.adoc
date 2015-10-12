@@ -1,4 +1,4 @@
-== Step 7. Optimizing for retina display
+== Step 7: Optimizing for retina display
 
 We may find the app looks blurry when we test the web app in iPhone or Android device with high-definition display. That’s because the retina display tries to render the graphics by doubling our pixels. In this step, we optimize the canvas rendering in retina display.
 

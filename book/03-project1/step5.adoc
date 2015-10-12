@@ -1,4 +1,4 @@
-== Step 5. Displaying another scene after menu selection
+== Step 5: Displaying another scene after menu selection
 
 In this step, we build a simple scene manager to control the presence of different scenes.
 

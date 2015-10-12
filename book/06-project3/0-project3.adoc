@@ -1,0 +1,247 @@
+:sectnums:
+= Project 3 – Solar System
+
+NOTE: This chapter is not yet completed and it requires further re-written.
+
+In this project, we are going to create a tool that presents our solar system.
+
+The system is constructed by HTML DOM elements and CSS transform and transition.
+
+== Why is this project awesome?
+
+By following the project steps, you will learn how to scroll the view in a parallax effect. This effect created an illusion of depth. That's based on our real world that's in perspective view. Things aren't look the same at different distances. Things that's far away from us looks smaller and moves slower to us. By creating the same scaling and movement at different layers, we can create similar depth feeling.
+
+
+
+== Preparation
+
+Before we get started, we want to include one more Gulp plugin.
+
+If you are using an existing project example, you may run the following command to add the `gulp-sass` compiler to the project.
+
+	npm install gulp-sass --save-dev
+
+If you are working on a new folder, you may download the following skeleton which contains the basic project file structure and the `package.json` file.
+
+	http://mak.la/cjs-skeleton
+
+Make sure to run `npm install --save-dev` after you download the skeleton code.
+
+SCSS is a kind of CSS preprocessor. Preprocessor means that we write another syntax to express our css rules and then compile it into css. The beauty of Scss is that it is like css. If you don't use any of the Scss specific syntax, the code is actually valid css file.
+
+== HTML
+
+This is the HTML skeleton.
+
+	<div id='app'>
+	  <div id='solar-system' class='focus-earth'>
+	    <div class='layer deep-bg'></div>
+	    <div class='layer bg'></div>
+	    <div class='layer planets'>
+	      <!-- each planet here -->
+	    </div>
+	  </div>
+	  <div class='info-panel'>
+	    <!-- Info text here -->
+	  </div>
+	  <div class='buttons'>
+	    <!-- button to focus on for every planet -->
+	  </div>
+
+	  <div class='detail-panel out'>
+	    <!-- pop up panel with detail information on every planet -->
+	  </div>
+	</div>
+
+Almost the elements are position absolute. The `#app` element is relative position to act as the relative coordinate for all the absolute position child elements. They all overlap together. Then we adjust the transform and too left bottom right to control their position.
+
+I\> We use absolute position when we want the layers (groups) to overlap together.
+
+The solar system had three layers. The deep background, background and the planets. The two background layers is essential to create a space movement illusion.
+
+I\> In the future, there may be additional layers such as the sun and a front layer of dust.
+
+Basic CSS:
+
+	* {
+	  box-sizing: border-box;
+	}
+
+	body, div, ul, li, h1, h2, h3, p {
+	  margin: 0;
+	  padding: 0;
+	}
+
+	img {
+	  max-width: 100%;
+	}
+
+	html, body, #app, #solar-system {
+	  width: 100%;
+	  height: 100%;
+	}
+
+
+	#app {
+	  position: relative;
+	  overflow: hidden;
+	}
+
+== Planet buttons
+
+HTML:
+
+	<div class='buttons'>
+	    <a href='#mercury' class='focus-button'>Mercury</a>
+	    <a href='#venus' class='focus-button'>Venus</a>
+	    <a href='#earth' class='focus-button'>Earth</a>
+	    <a href='#mars' class='focus-button'>Mars</a>
+	    <a href='#jupiter' class='focus-button'>Jupiter</a>
+	    <a href='#saturn' class='focus-button'>Saturn</a>
+	    <a href='#uranus' class='focus-button'>Uranus</a>
+	    <a href='#neptune' class='focus-button'>Neptune</a>
+	  </div>
+
+CSS:
+
+	/* User Inteface */
+	.buttons {
+	  position: absolute;
+	  height: 100%;
+	  right: 0;
+
+	  display: flex;
+	  flex-direction: column-reverse;
+
+	  a {
+	    display: block;
+	    flex: 1;
+
+	    text-decoration: none;
+	    color: #555;
+
+	    line-height: 50px;
+
+	    &.active {
+	      color: white;
+	    }
+	  }
+	}
+
+The button is laid out using the flexbox to ensure they are evenly distributed.
+
+The nested scope in the preprocessor allows us to group related styles together. We can modularize the styles to specific part of the app.
+
+== The solar system
+
+	$space-height: 13000px;
+	$bg-z: 10;
+	$deep-bg-z: 30;
+
+	#solar-system {
+	  position: absolute;
+	  overflow: hidden;
+	  transform-origin: 0 0;
+	}
+
+
+	.layer {
+	  position: absolute;
+	  transition: all 1.5s ease-out;
+	}
+
+	.deep-bg {
+	  width: 100%;
+	  height: $space-height;
+	  background: black url(../images/deep-bg.jpg);
+	}
+
+	.bg {
+	  width: 100%;
+	  height: $space-height;
+	  background: url(../images/bg.jpg);
+	  opacity: .3;
+	}
+
+	.planet {
+	  position: absolute;
+	  img {
+	    max-width: 80px;
+	  }
+	}
+
+Those preprocessors usually allow us to define variable and expressions. For example, we defined several variables for our solar system. They are the height of the space view. The virtual Z index of the layers.
+
+
+We don't need the height of the space view if we order the planets from top to bottom.
+
+We need the height because we are calculating the position from the bottom.
+
+== Showing the planets
+
+The value of the planet is based on the average distance the real planet are away from the sun. We have a multiplier to adjust the scale.
+
+	$planets: "mercury" "venus" "earth" "mars" "jupiter" "saturn" "uranus" "neptune";
+	$distances:  57*2px 108*2px 150*2px 228*2px 779*2px 1430*2px 2880*2px 4500*2px;
+	$x-positions: 30vw 15vw 45vw 50vw 35vw 60vw 25vw 56vw;
+
+	@for $i from 1 through length($planets) {
+	  $name: nth($planets, $i);
+	  $distance: nth($distances, $i);
+	  $x-position: nth($x-positions, $i);
+	  .#{$name} {
+	    transform: translateX($x-position) translateY(calc(#{$space-height} - #{$distance}));
+	  }
+
+	  ...
+	}
+
+
+The looping expressions allows us to define similar css rules without explicitly typing all of them. For example, we use loop and a list to iterate all 8 planets rules and their styles when focused.
+
+Scss list is useful when we cant express the calculation with just the looping index. For example, we want to iterate the name of the 8 planets, so we use a list to store the planet name and use it to define the class based on these names.
+
+You may think that list is kind of array in programing language. Actually Scss even has a nested list like a 2 dimension array.
+
+There are some utility functions to help us manipulate the scss list. The most common one is the `nth` function where we get the value based on the index, usually within an for loop. The `length` function helps us to define the ending condition if the for loop.
+
+The `calc` function in css allows is to express a calculation as a property value.
+
+I\> Please note that css does support using expression as property value, it is the calc function. And css also supports variable. But variable are supported in Firefox only right now. So we have to mix the Scss variable and the css calc. By mixing them, we need to use the `#{}` syntax to distinguish the Scss expression and the css expression.
+
+	@for $i from 1 through length($planets) {
+	  $name: nth($planets, $i);
+	  $distance: nth($distances, $i);
+
+	  ...
+
+	  #solar-system.focus-#{$name} {
+	    .planets.layer {
+	      transform: translateY(calc(-#{$space-height} + #{$distance} + 40vh));
+	    }
+	    .bg.layer{
+	      transform: translateY(calc((-#{$space-height} + #{$distance} + 40vh) / #{$bg-z}));
+	    }
+	    .deep-bg.layer{
+	      transform: translateY(calc((-#{$space-height} + #{$distance} + 40vh) / #{$deep-bg-z}));
+	    }
+	  }
+	}
+
+The focus style explicitly moves the 3 layers into different transform Y based on the calculation.
+
+By toggling different focus styles on different planets, the 3 layers move in different speeds and thus created the parallax effect.
+
+
+
+== Detail Panel
+
+	<div class='detail-panel out'>
+	  <div id='tab-mercury' class='tab'>
+	    <h1>Mercury</h1>
+	    <img src='images/mercury.jpg' alt='Mercury'>
+	    <p><small>Photo by NASA. Public Domain.</small></p>
+	    <p><small>Tap anywhere to close</small></p>
+	  </div>
+	  <!-- other planets’ detail go here -->
+	</div>

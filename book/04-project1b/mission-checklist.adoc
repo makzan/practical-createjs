@@ -1,4 +1,4 @@
-## Mission Checklist
+== Mission Checklist
 
 We are going to replace the canvas-based content into DOM elements.
 

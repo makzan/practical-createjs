@@ -1,4 +1,4 @@
-== Step 2. Setting up the canvas and CreateJS library
+== Step 2: Setting up the canvas and CreateJS library
 
 In this step, we setup the canvas and the CreateJS for the project.
 

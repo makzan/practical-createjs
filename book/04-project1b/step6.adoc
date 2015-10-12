@@ -1,0 +1,36 @@
+== Step 6: Supporting retina display
+
+=== Preparation
+
+Make sure you have downloaded the new images assets that contain the `@2x` version of the images.
+
+http://mak.la/cjs-proj1b-images.zip
+
+=== Time for Action
+
+1. In the `index.html`, We add the `srcset` attribute for every `img` tag.
++
+.index.html
+[source,html]
+----
+<img src="images/header.png" srcset='images/header.png 1x, images/header@2x.png 2x' alt="Header">
+...
+<li><a href="#detail-page"><img src='images/a.png' srcset='images/a.png 1x, images/a@2x.png 2x' alt='Photo A'></a></li>
+<li><a href="#detail-page"><img src='images/b.png' srcset='images/b.png 1x, images/b@2x.png 2x' alt='Photo B'></a></li>
+<li><a href="#detail-page"><img src='images/c.png' srcset='images/c.png 1x, images/c@2x.png 2x' alt='Photo C'></a></li>
+...
+<img src='images/info.png' srcset='images/info.png 1x, images/info@2x.png 2x' alt='Link to Info'>
+...
+<img src='images/header-back.png' srcset='images/header-back.png 1x, images/header-back@2x.png 2x' alt='Back to main'>
+----
+
+=== What’s happening?
+
+`srcset` allows us to define separated images sources for different screen density.
+
+Here is the syntax.
+
+[source,html]
+----
+<img src='DEFAULT_PATH' src='FILE_PATH 1x, FILE_PATH 2x, FILE_PATH 3x' alt=''>
+----

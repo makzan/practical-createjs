@@ -1,0 +1,70 @@
+## 1. Setup the project
+
+
+
+### Time for Action
+
+1. The `index.html` file.
+
+	{title="index.html"}
+		<!DOCTYPE html>
+		<html lang='en'>
+		  <head>
+		    <meta charset='utf-8'>
+		    <meta name='viewport' content='width=device-width, initial-scale=1'>
+		    <meta name='apple-mobile-web-app-capable' content='yes'>
+		    <title>Rain or Not</title>
+		    <link rel='stylesheet' href='styles/app.css'>
+		  </head>
+		  <body>
+		    <div id='app'>
+		      <div id='main' class='page loading'>
+		        <header>Macao</header>
+		        <canvas id='app-canvas' class='out' width='300' height='300'>
+		          <!-- fallback content -->
+		          <img class='rainy-only status' src='http://placehold.it/300x300&text=rainy' alt='rainy'>
+		          <img class='sunny-only status' src='http://placehold.it/300x300&text=sunny' alt='sunny'>
+		        </canvas>
+		        <p class='description rainy-only'>Bring your umbrella</p>
+		        <p class='description sunny-only'>Have a nice day!</p>
+		      </div>
+		    </div>
+
+		    <script src='//code.jquery.com/jquery.min.js'></script>
+		    <script src='//code.createjs.com/easeljs-0.7.1.min.js'></script>
+		    <script src='//code.createjs.com/tweenjs-0.5.1.min.js'></script>
+		    <script src='//code.createjs.com/movieclip-0.7.1.min.js'></script>
+		    <script src='scripts/rain-or-not-lib.js'></script>
+		    <script src='scripts/app.js'></script>
+		    <script src='//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
+		  </body>
+		</html>
+
+
+2. The `app.coffee` file.
+
+	{title="app.coffee"}
+		this.rainOrNot = {}
+
+		class App
+		  constructor: ->
+		    console.log "Do you need your umbrella today?"
+
+		    @refresh()
+
+
+		  refresh: ->
+		    data = new Data()
+		    view = new View()
+		    data.fetch (is_rainy) ->
+		      view.update(is_rainy)
+
+3. Make sure we invoke the App:
+	{title="app.coffee"}
+		new App()
+
+
+
+
+
+### What just happened?

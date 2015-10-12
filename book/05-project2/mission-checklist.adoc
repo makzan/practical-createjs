@@ -1,0 +1,20 @@
+## Mission Checklist
+
+We are going to replace the canvas-based content into DOM elements.
+
+1. Setup the project
+2. Data
+3. Mocking API
+4. View
+5. Adding Canvas
+6. Moving the Canvas in
+7. Aligning with FlexBox
+8. Device Rotation
+
+
+{title="The core logic of the app"}
+	;(function($){
+	$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=Macao,MO&callback=?', function(data){
+	    console.log(data);
+	  });
+	}).call(this, jQuery);
