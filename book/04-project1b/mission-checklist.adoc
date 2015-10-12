@@ -1,0 +1,10 @@
+## Mission Checklist
+
+We are going to replace the canvas-based content into DOM elements.
+
+1. Defining DOM elements
+2. Controlling page-based scenes.
+3. Positioning the canvas-based transition to fit window size.
+4. Falling back for old browser without canvas support.
+5. Fine tuning the app styles.
+6. Supporting retina display.

@@ -1,0 +1,5 @@
+## Project Preparation
+
+In the project, we will need the updated image assets. You may download them via the following URL.
+
+http://mak.la/cjs-proj1b-images.zip

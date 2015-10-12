@@ -1,0 +1,29 @@
+:sectnums:
+= Project 2—
+aoeu
+
+
+:sectnums!:
+include::mission-checklist.adoc[]
+
+include::project-preparation.adoc[]
+
+:sectnums:
+include::step1.adoc[]
+
+include::step2.adoc[]
+
+include::step3.adoc[]
+
+include::step4.adoc[]
+
+include::step5.adoc[]
+
+include::step6.adoc[]
+
+include::step7.adoc[]
+
+:sectnums!:
+== Further challenges
+
+aoeu

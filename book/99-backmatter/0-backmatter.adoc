@@ -17,9 +17,9 @@ Also, great thanks to the following friends who keep giving feedback a during th
 
 == Change Log
 
-Version: 2015-01-09
+Version: 2015-10-12
 
-The schedule of the book is a weekly release for new chapters. Then it will get edited and done in early 2015. The following is the change log of this book.
+The schedule of the book is a weekly release for new chapters. Then it will get edited and done in early 2016. The following is the change log of this book.
 
 
 

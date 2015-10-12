@@ -9,15 +9,15 @@ Before we begin, make sure we have the `transitions.js` file ready in the `scrip
 .index.html
 [source,html]
 ----
-	...
-	  <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
-	  <script src="http://code.createjs.com/tweenjs-0.5.1.min.js"></script>
-	  <script src="http://code.createjs.com/movieclip-0.7.1.min.js"></script>
-	  leanpub-start-insert
-	  <script src="scripts/transitions.js"></script>
-	  leanpub-end-insert
-	  <script src="scripts/app.js"></script>
-	</body>
+...
+  <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
+  <script src="http://code.createjs.com/tweenjs-0.5.1.min.js"></script>
+  <script src="http://code.createjs.com/movieclip-0.7.1.min.js"></script>
+  leanpub-start-insert
+  <script src="scripts/transitions.js"></script>
+  leanpub-end-insert
+  <script src="scripts/app.js"></script>
+</body>
 ----
 
 NOTE: If you have modified the animation in Flash, you need to publish the Flash document again to update the JavaScript file.
@@ -27,7 +27,7 @@ NOTE: If you have modified the animation in Flash, you need to publish the Flash
 Let’s work on the following steps to add the animated transition to the app.
 
 1. In the `scene-manager.coffee`, we add one new method `pushSceneWithTransition` which add the animated transition while switching scenes.
-
++
 .scene-manager.coffee
 [source,coffeescript]
 ----
@@ -51,7 +51,7 @@ this.exampleApp.sceneManager = {
 ----
 
 2. In the `scenes.coffee`, we change to use the new `pushSceneWithTransition` method.
-
++
 .scenes.coffee
 [source,coffeescript]
 ----

@@ -9,7 +9,7 @@ In this step, we implement the menu scene and put menu item on it.
 Let’s follow the steps to create the menu scene.
 
 1. We create the our menu scene. Let’s add the code to `scenes.coffee`.
-
++
 .scenes.coffee
 [source,coffeescript]
 ----
@@ -46,7 +46,7 @@ this.exampleApp.SceneA = SceneA
 ----
 
 2. Make sure we import any newly created class into our App scope in order to use them.
-
++
 .app.coffee
 [source,coffeescript]
 ----
@@ -57,7 +57,7 @@ SceneA = this.exampleApp.SceneA
 ----
 
 3. In the app logic, we replace the old `Scene` by the newly created `SceneA` class.
-
++
 .app.coffee
 [source,coffeescript]
 ----

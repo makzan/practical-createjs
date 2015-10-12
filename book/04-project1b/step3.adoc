@@ -1,0 +1,42 @@
+## 3. Positioning the canvas transition
+
+### Time for Action
+
+1. In the `retinalize.coffee` file, we add a `setFullScreen` function that scales the canvas to fit the window dimension.
+
+	{title="retinalize.coffee"}
+		# a global app object.
+		this.exampleApp ?= {}
+
+		setting = this.exampleApp.setting
+
+		this.utility ?= {}
+
+		this.utility.setFullScreen = (canvas, stage) ->
+		  canvas.setAttribute 'width', $(window).width()
+		  canvas.setAttribute 'height', $(window).height()
+		  setting.width = $(window).width()
+		  setting.height = $(window).height()
+
+		  # 300 is the original Flash canvas width
+		  stage.scaleX = stage.scaleY = setting.width / 300
+
+2. In our app’s entry point, we invoke the `setFullScreen` function for the first time and register it to be run every time when the window resizes.
+
+	{title="app.coffee"}
+		class App
+		  # Entry point.
+		  constructor: ->
+		    console.log "Welcome to my portfolio."
+
+		    @canvas = document.getElementById("app-canvas")
+		    @stage = new cjs.Stage(@canvas)
+
+		    leanpub-start-insert
+		    utility.setFullScreen(@canvas, @stage)
+
+		    window.onresize = =>
+		      utility.setFullScreen(@canvas, @stage)
+		    leanpub-end-insert
+
+		    ...
