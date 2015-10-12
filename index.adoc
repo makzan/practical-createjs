@@ -17,4 +17,5 @@ link:practical-createjs.mobi[Mobi version]
 
 1. link:0-frontmatter.html[]
 2. link:0-preparation.html[]
+2. link:0-project1.html[]
 3. link:0-backmatter.html[]
