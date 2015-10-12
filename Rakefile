@@ -8,6 +8,11 @@ namespace :book do
       FileUtils.copy(image, "output/images/" + File.basename(image))
       FileUtils.copy(image, "images/" + File.basename(image))
     end
+
+    # Copy anything in public
+    Dir.glob("public/*").each do |file|
+      FileUtils.copy(file, "output/" + File.basename(file))
+    end
   end
 
   desc 'build basic book formats'
