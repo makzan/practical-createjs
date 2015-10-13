@@ -43,3 +43,12 @@ a:hover {
   border-right: 1px solid #efefef;
   font-family: "Gill Sans MT", "Gill Sans", sans-serif;
 }
+
+.sect1 {
+  border-top: 1px solid #efefef;
+}
+
+#header, #content {
+  max-width: 700px;
+  margin: auto;
+}

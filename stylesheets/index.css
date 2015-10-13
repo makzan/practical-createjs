@@ -32,7 +32,10 @@ a:hover {
   background: yellow;
 }
 
-
+#header, #content {
+  max-width: 700px;
+  margin: auto;
+}
 .admonitionblock {
   border: 1px dotted #efefef;
 }
