@@ -46,7 +46,7 @@ namespace :book do
     puts " -- Mobi output at output/practical-createjs.mobi"
 
     puts "Converting to PDF... (this one takes a while)"
-    `bundle exec asciidoctor-pdf -D output practical-createjs.adoc 2>/dev/null`
+    `bundle exec asciidoctor-pdf -a source-highlighter=coderay -D output practical-createjs.adoc 2>/dev/null`
     puts " -- PDF  output at output/practical-createjs.pdf"
   end
 
