@@ -1,4 +1,4 @@
-## Mission Checklist
+== Mission Checklist
 
 We are going to replace the canvas-based content into DOM elements.
 
@@ -12,9 +12,12 @@ We are going to replace the canvas-based content into DOM elements.
 8. Device Rotation
 
 
-{title="The core logic of the app"}
-	;(function($){
-	$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=Macao,MO&callback=?', function(data){
-	    console.log(data);
-	  });
-	}).call(this, jQuery);
+.The core logic of the app
+[source,js]
+----
+;(function($){
+$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=Macao,MO&callback=?', function(data){
+    console.log(data);
+  });
+}).call(this, jQuery);
+----

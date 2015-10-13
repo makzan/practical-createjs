@@ -1,34 +1,34 @@
+== Step 6: Moving the canvas in
 
 
-## 6. Moving the canvas in
-
-
-
-
-
-### Time for Action
+=== Time for Action
 
 This is a subtle effect that we move the canvas icon from bottom to the center of the viewport by using CSS3 transition.
 
-`app.css` file
+.app.css
+[source,css]
+----
+.out {
+  transform: translateY(100%);
+  opacity: 0;
+}
 
-	.out {
-	  transform: translateY(100%);
-	  opacity: 0;
-	}
-
-	.in {
-	  transition: all .75s cubic-bezier(0.140, 0.460, 0.160, 1.210);
-	  transform: translateY(0%);
-	  opacity: 1;
-	}
+.in {
+  transition: all .75s cubic-bezier(0.140, 0.460, 0.160, 1.210);
+  transform: translateY(0%);
+  opacity: 1;
+}
+----
 
 The transition may fail if the data is cached without loading. We need to add a little delay to make the CSS transition work.
 
-	class App
-	  constructor: ->
-	    console.log "Do you need your umbrella today?"
+[source,coffeescript]
+----
+class App
+  constructor: ->
+    console.log "Do you need your umbrella today?"
 
-	    setTimeout =>
-	      @refresh()
-	    , 500
+    setTimeout =>
+      @refresh()
+    , 500
+----

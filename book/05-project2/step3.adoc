@@ -1,26 +1,28 @@
-## 3. Mocking API
+== Step 3: Mocking API
 
 We need to use different API response to test our logic.
 
-Mocking an API usually means that we create a static JSON file and put it somewhere that the development app can access. But this could be more automatic if we have lots of mock API to create. A tool named [mockable](http://mockable.io) comes to help.
+Mocking an API usually means that we create a static JSON file and put it somewhere that the development app can access. But this could be more automatic if we have lots of mock API to create. A tool named http://mockable.io[mockable] comes to help.
 
 I created 2 canned responses, sunny and rainy, with the following URL. The response JSON is copied from the source, OpenWeather.
 
-	http://demo5385708.mockable.io/weather?sunny
-	http://demo5385708.mockable.io/weather?rainy
+http://demo5385708.mockable.io/weather?sunny
+
+http://demo5385708.mockable.io/weather?rainy
 
 
-
-
-### Time for Action
+=== Time for Action
 
 1. In the `Data` class, we add a mock API to test different API response. Add the following code to override the API url.
++
+.app.coffee
+[source,coffeescript]
+----
+class Data
+  constructor: ->
+    @api = 'http://api.openweathermap.org/data/2.5/weather?q=Macao,MO'
 
-	{title="app.coffee"}
-		class Data
-		  constructor: ->
-		    @api = 'http://api.openweathermap.org/data/2.5/weather?q=Macao,MO'
-
-		    # mock
-		    @api = 'http://demo5385708.mockable.io/weather?rainy'
-		  ...
+    # mock
+    @api = 'http://demo5385708.mockable.io/weather?rainy'
+  ...
+----

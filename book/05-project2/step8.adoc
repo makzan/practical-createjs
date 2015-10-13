@@ -1,66 +1,71 @@
-
-## 8. Device Rotation
+== 8. Device Rotation
 
 In this step, we will add a motion effect where the rainy and sunny icon slightly moves based on the device rotation.
 
 This is done by listening to the `DeviceOrientationEvent` and use the rotation degree to control the icon.
 
-### Time for Action
+=== Time for Action
 
 Let’s work on the following steps to create a motion effects based on the rotation degree of the device.
 
 1. We create a new class which keep storing the latest device rotation. The value is from the Gyroscope where axises are represented in `alpha`, `beta`, `gamma`.
++
+.app.coffee
+[source,coffeescript]
+----
+class DeviceRotation
+  constructor: ->
+    DeviceRotation.a = DeviceRotation.b = DeviceRotation.g = 0
 
-	{title="app.coffee"}
-		class DeviceRotation
-		  constructor: ->
-		    DeviceRotation.a = DeviceRotation.b = DeviceRotation.g = 0
-
-		    # gyroscope
-		    $(window).on 'deviceorientation', (e)->
-		      DeviceRotation.a = @a = e.originalEvent.alpha
-		      DeviceRotation.b = @b = e.originalEvent.beta
-		      DeviceRotation.g = @g = e.originalEvent.gamma
-		      $('#debug').text("#{@a} #{@b} #{@g}")
-
+    # gyroscope
+    $(window).on 'deviceorientation', (e)->
+      DeviceRotation.a = @a = e.originalEvent.alpha
+      DeviceRotation.b = @b = e.originalEvent.beta
+      DeviceRotation.g = @g = e.originalEvent.gamma
+      $('#debug').text("#{@a} #{@b} #{@g}")
+----
 
 2. We need to apply the value. In the `CanvasView` class, we use the device rotation to offset the sunny and rainy icons.
++
+.app.coffee
+[source,coffeescript]
+----
+applyDeviceRotation: ->
+  a = DeviceRotation.a
+  b = DeviceRotation.b
+  g = DeviceRotation.g
 
-	{title="app.coffee"}
-		applyDeviceRotation: ->
-		  a = DeviceRotation.a
-		  b = DeviceRotation.b
-		  g = DeviceRotation.g
+  @icon.front.x = CanvasView.width/2 + g/10
+  @icon.front.y = CanvasView.height/2 + b/10
 
-		  @icon.front.x = CanvasView.width/2 + g/10
-		  @icon.front.y = CanvasView.height/2 + b/10
-
-		  @icon.back.x = CanvasView.width/2 + g/5
-		  @icon.back.y = CanvasView.height/2 + b/5
-
+  @icon.back.x = CanvasView.width/2 + g/5
+  @icon.back.y = CanvasView.height/2 + b/5
+----
 
 3. Now the App constructor becomes:
++
+.app.coffee
+[source,coffeescript]
+----
+class App
+  constructor: ->
+    console.log "Do you need your umbrella today?"
 
-	{title="app.coffee"}
-		class App
-		  constructor: ->
-		    console.log "Do you need your umbrella today?"
+    setTimeout =>
+      @refresh()
+    , 500
 
-		    setTimeout =>
-		      @refresh()
-		    , 500
+    $('body').click => @refresh()
 
-		    $('body').click => @refresh()
-
-		    new DeviceRotation()
+    new DeviceRotation()
+----
 
 
-
-### What just happened?
+=== What just happened?
 
 The `#debug` element is used to observe the value of the gyroscope. By printing out the values, we can hold the device on hand, and then rotate the device into different directions and observe how the tilting changes the three rotation axises. After we get what we need from the numbers, we can hide it or even delete it. Make sure these debug information is not visible when we deploy the app in production environment.
 
-#### Device Orientation Event
+==== Device Orientation Event
 
 For more information on using the 3 axises of the device rotation, please check the Apple Developer documentation:
 
@@ -72,7 +77,7 @@ https://play.google.com/store/apps/details?id=net.makzan.gyroinspcetor
 
 You may use this tool to inspect the value you want by holding the device at the target rotation.
 
-#### Controlling Flash instance
+==== Controlling Flash instance
 
 When we set an instance name in the Flash movie clip which being exported to canvas, we can actually access that instance from the Javascript. This gives a huge convenient way to manipulated with the exported graphics.
 

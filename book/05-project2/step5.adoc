@@ -1,35 +1,38 @@
-## 5. CanvasView
+== Step 5: CanvasView
 
-	class CanvasView
-	  constructor: ->
-	    cjs = createjs
-	    @canvas = document.getElementById("app-canvas")
-	    @stage = new cjs.Stage(@canvas)
+[source,coffeescript]
+----
+class CanvasView
+  constructor: ->
+    cjs = createjs
+    @canvas = document.getElementById("app-canvas")
+    @stage = new cjs.Stage(@canvas)
 
-	    cjs.Ticker.setFPS 60
-	    cjs.Ticker.addEventListener "tick", @stage
-	    cjs.Ticker.addEventListener "tick", @tick
+    cjs.Ticker.setFPS 60
+    cjs.Ticker.addEventListener "tick", @stage
+    cjs.Ticker.addEventListener "tick", @tick
 
-	    @retinalize()
-	  tick: =>
-	    @applyDeviceRotation()
+    @retinalize()
+  tick: =>
+    @applyDeviceRotation()
 
-	  retinalize: ->
-	    CanvasView.width ?= @canvas.width
-	    CanvasView.height ?= @canvas.height
+  retinalize: ->
+    CanvasView.width ?= @canvas.width
+    CanvasView.height ?= @canvas.height
 
-	    @canvas.style.width = CanvasView.width + 'px'
-	    @canvas.style.height = CanvasView.height + 'px'
-	    @canvas.width = CanvasView.width * 2
-	    @canvas.height = CanvasView.height * 2
-	    @stage.scaleX = @stage.scaleY = 2
+    @canvas.style.width = CanvasView.width + 'px'
+    @canvas.style.height = CanvasView.height + 'px'
+    @canvas.width = CanvasView.width * 2
+    @canvas.height = CanvasView.height * 2
+    @stage.scaleX = @stage.scaleY = 2
 
-	  moveIn: -> $(@canvas).removeClass('out').addClass('in')
-	  reset: -> $(@canvas).removeClass().addClass('out')
+  moveIn: -> $(@canvas).removeClass('out').addClass('in')
+  reset: -> $(@canvas).removeClass().addClass('out')
 
-	  showRainy: ->
-	    @icon = new lib.Rainy()
-	    @stage.addChild @icon
-	  showSunny: ->
-	    @icon = new lib.Sunny()
-	    @stage.addChild @icon
+  showRainy: ->
+    @icon = new lib.Rainy()
+    @stage.addChild @icon
+  showSunny: ->
+    @icon = new lib.Sunny()
+    @stage.addChild @icon
+----

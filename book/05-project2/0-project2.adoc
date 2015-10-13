@@ -18,8 +18,6 @@ We try to separate the logic, data and the view. This ensues that each module of
 :sectnums!:
 include::mission-checklist.adoc[]
 
-include::project-preparation.adoc[]
-
 :sectnums:
 include::step1.adoc[]
 
