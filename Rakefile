@@ -19,6 +19,12 @@ namespace :book do
       FileUtils.copy(codeFile, "code/" + File.basename(codeFile))
     end
 
+    # Stylesheet folder
+    Dir.mkdir 'output/stylesheets' unless Dir.exists? 'output/stylesheets'
+    Dir.glob("stylesheets/*").each do |cssFile|
+      FileUtils.copy(cssFile, "output/stylesheets/" + File.basename(cssFile))
+    end
+
     # Copy anything in public
     Dir.glob("public/*").each do |file|
       FileUtils.copy(file, "output/" + File.basename(file))
@@ -28,7 +34,7 @@ namespace :book do
   desc 'build basic book formats'
   task :build => :prebuild do
     puts "Converting to HTML..."
-    `bundle exec asciidoctor -D output practical-createjs.adoc`
+    `bundle exec asciidoctor -a stylesheet=web.css -a stylesdir=stylesheets -D output practical-createjs.adoc`
     puts " -- HTML output at output/practical-createjs.html"
 
     puts "Converting to EPub..."
