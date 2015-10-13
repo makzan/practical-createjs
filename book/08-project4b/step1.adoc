@@ -76,7 +76,7 @@ drawChart: (value, refValue = 0) ->
     @stage.update()
 ----
 
-3. We changed the `drawChart` method arguments. Now we need the reference value for positioning the reference line. So we update the view logic where it toggles the `drawChart` method.
+4. We changed the `drawChart` method arguments. Now we need the reference value for positioning the reference line. So we update the view logic where it toggles the `drawChart` method.
 +
 .view.coffee
 [source,coffeescript]
