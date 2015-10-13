@@ -8,7 +8,7 @@ v2.0, October 14, 2015: AsciiDoc Rewrite
 :sectnums:
 :linkcss:
 :source-highlighter: highlightjs
-:front-cover-image: image:book/cover.png[width=2550,height=3300]
+:front-cover-image: image:cover.png[width=2550,height=3300]
 :imagesdir: images
 :username: makzan
 
