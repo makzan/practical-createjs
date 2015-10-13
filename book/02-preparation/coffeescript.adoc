@@ -1,23 +1,28 @@
 == CoffeeScript
+:1: http://coffeescript.org/
+:2: http://js2coffee.org
+:3: http://arcturo.github.io/library/coffeescript/
+:4: http://coffeescriptcookbook.com
+:5: https://leanpub.com/coffeescript-ristretto/read
 
 CoffeeScript is beauty way to write JavaScript. It provides syntax that makes writing JavaScript application much easier. We will use CoffeeScript in some examples. Please note that CoffeeScript _is_ JavaScript. It is like shorthand of JavaScript. When we write our program, we still think in JavaScript way. So you still need to learn JavaScript well.
 
-- [Official site of CoffeeScript](http://coffeescript.org/)
+- {1}[Official site of CoffeeScript]
++
+The official site contains all the syntax that we need to get started.
 
-	The official site contains all the syntax that we need to get started.
+- {2}[JS2Coffee converter]
++
+At the beginning of learning CoffeeScript, you may find yourself struggling between JS and Coffee. This converter is a handy tool to convert the given script between JavaScript and CoffeeScript.
 
-- [JS2Coffee converter](http://js2coffee.org)
+- {3}[The little book of CoffeeScript]
++
+If you prefer reading book than website, you’ll find this book useful as the reference guide to the CoffeeScript syntax.
 
-	At the beginning of learning CoffeeScript, you may find yourself struggling between JS and Coffee. This converter is a handy tool to convert the given script between JavaScript and CoffeeScript.
+- {4}[CoffeeScript Cookbook]
++
+This cookbook contains lots of practical examples for your daily JS development needs.
 
-- [The little book of CoffeeScript](http://arcturo.github.io/library/coffeescript/)
-
-	If you prefer reading book than website, you’ll find this book useful as the reference guide to the CoffeeScript syntax.
-
-- [CoffeeScript Cookbook](http://coffeescriptcookbook.com)
-
-	This cookbook contains lots of practical examples for your daily JS development needs.
-
-- [CoffeeScript Ristretto](https://leanpub.com/coffeescript-ristretto/read)
-
-	This book provides a journey of JavaScript and CoffeeScript development process. The examples in this book demonstrates how we can write code to get the job done at the first step, then fine tuning the code to make it more readable and maintainable.
+- {5}[CoffeeScript Ristretto]
++
+This book provides a journey of JavaScript and CoffeeScript development process. The examples in this book demonstrates how we can write code to get the job done at the first step, then fine tuning the code to make it more readable and maintainable.

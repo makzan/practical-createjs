@@ -1,13 +1,8 @@
 == About author
-:1:
-:2:
-:3:
-:4:
-:5:
 
 Makzan focuses on web development and game design. He has over 14 years of experience in building digital products. He has worked on real-time multiplayer interaction games, iOS applications, and rich interactive websites.
 
-He has written 4 books and 1 video course on building a Flash virtual world and creating games with HTML5 and the latest web standards. He is currently teaching courses in Hong Kong and Macao SAR. He writes tutorials and shares his thoughts on [makzan.net](http://makzan.net).
+He has written 4 books and 1 video course on building a Flash virtual world and creating games with HTML5 and the latest web standards. He is currently teaching courses in Hong Kong and Macao SAR. He writes tutorials and shares his thoughts on http://makzan.net[makzan.net].
 
 === Books by Makzan
 

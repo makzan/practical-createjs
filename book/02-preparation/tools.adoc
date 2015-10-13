@@ -18,7 +18,7 @@ Browsers are needed to test and debug our web app rendering.
 
 - Android and iOS Simulator
 +
-We need simulator to test how our web apps run in mobile operating system. We’ll use [Genymotion](http://www.genymotion.com) or official simulator for Android. We need Mac OS X and Xcode for the iOS simulator.
+We need simulator to test how our web apps run in mobile operating system. We’ll use http://www.genymotion.com[Genymotion] or official simulator for Android. We need Mac OS X and Xcode for the iOS simulator.
 
 NOTE: Actually I always recommend testing our web apps in real devices. We can feel our own interface by holding it on hand. Is the button placement easy for tap? Is the font size suitable? How is the performance of the app running in aged devices? These are the questions that only real devices testing can answer.
 

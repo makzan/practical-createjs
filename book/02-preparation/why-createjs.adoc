@@ -15,13 +15,14 @@ As a bonus, CreateJS integrates deeply in Adobe Flash. This allows us to create 
 
 Here is a quick demo to show how Adobe Flash exports an advertisement animation and plays in HTML5 with CreateJS. The following example is the classic tween animation directly exported from Flash. I didn’t edit the output code.
 
-![Classic tween transition](images/whycreatejs-timeline.png)
+image:images/whycreatejs-timeline.png[Classic tween transition]
 
 How we make use of the generated code in our CreateJS project? We can instantiate the exported object add add it to the display list. The object name follows the name we set in the Flash IDE, either the linked class name or the library name. Then we can just add it to the CreateJS hierarchy by as using a normal Sprite object.
 
 
 After we include the exported JavaScript file into our project, we can add the movieclip from the `.fla` library to the canvas display list by using the following code snippet. Here we assumed the clip name in Flash library is called `ExampleSprite`.
 
+[source,js]
 ----
 var sprite = new ExampleSprite();
 this.stage.addChild(sprite);
