@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  background: #fefefe;
+  font-size: 16px;
+  line-height: 1.45em;
+  font-family: Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Gill Sans MT", sans-serif;
+  font-weight: bold;
+}
+
+a,
+a:link,
+a:visited {
+  color: #222;
+  border-bottom: 1px solid rgba(62, 142, 198, 0.25);
+  box-shadow: inset 0 -5px rgba(62, 142, 198, 0.25);
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+a:hover {
+  background: yellow;
+}
+
+
+.admonitionblock {
+  border: 1px dotted #efefef;
+}
+.admonitionblock td {
+  padding: 1em;
+}
+.admonitionblock .icon{
+  border-right: 1px solid #efefef;
+  font-family: "Gill Sans MT", "Gill Sans", sans-serif;
+}
+
+.sect1 {
+  border-top: 1px solid #efefef;
+}
