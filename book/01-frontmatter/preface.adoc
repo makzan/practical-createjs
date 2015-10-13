@@ -15,4 +15,4 @@ http://mak.la/cjs-examples
 
 You can git clone the project to your machine so that you can update the code by using git commands. Alternatively, you may click “Download Zip” to download the whole bundle.
 
-image:images/download-source-code.png[Download source code]
+image:download-source-code.png[Download source code]

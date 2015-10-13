@@ -54,7 +54,7 @@ namespace :book do
   task :build_chapter_html => :prebuild do
     puts "Converting chapters to HTML..."
     `bundle exec asciidoctor -a stylesheet=index.css -a stylesdir=stylesheets -D output index.adoc`
-    `bundle exec asciidoctor -a stylesheet=web.css -a stylesdir=stylesheets -a linkcss -D output book/*/0-*.adoc`
+    `bundle exec asciidoctor -a imagesdir=images -a stylesheet=web.css -a stylesdir=stylesheets -a linkcss -D output book/*/0-*.adoc`
     puts " -- HTML output done in output/"
   end
 end

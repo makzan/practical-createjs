@@ -106,6 +106,6 @@ transition.on 'sceneShouldChange', ->
 
 This relies on the Flash animation which dispatches the event at the middle of the transition animation.
 
-image:images/project-1-scene-should-change.png[sceneShouldChange event in the Flash timeline]
+image:project-1-scene-should-change.png[sceneShouldChange event in the Flash timeline]
 
 In the screenshot, you will find an action is defined in the middle of the transition animation. When the animation reaches this frame, it dispatch the event. We capture this custom event in the scene manager to actually switch the scene.
