@@ -23,7 +23,7 @@ Buy the book at {leanpub}[LeanPub].
 
 Read link:practical-createjs.html[One Page version].
 
-=== Ready by Chapters
+=== Read by Chapters
 - link:0-frontmatter.html[Frontmatter]
 - link:0-preparation.html[Preparation]
 - link:0-project1.html[Project 1]
