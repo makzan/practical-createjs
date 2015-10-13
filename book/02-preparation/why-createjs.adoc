@@ -30,7 +30,7 @@ this.stage.addChild(sprite);
 
 image:images/flash-ad.png[Canvas output of Flash ad]
 
-A\> This example code adds the exported animation on the stage for demonstration purpose. In your project, you may want to add the animation to the display list hierarchy.
+NOTE: This example code adds the exported animation on the stage for demonstration purpose. In your project, you may want to add the animation to the display list hierarchy.
 
 I have created a video demonstrating the process to make this advertisement and export the animation to CreateJS. You can find the video in the following link.
 

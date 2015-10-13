@@ -88,7 +88,7 @@ If you get the same result, that means our setup works.
 
 We just set up the assets compiling tool chain. After setting up the building streamline, we are ready to dig into the early project development in next task.
 
-=== Init a Node.js project with package.json
+==== Init a Node.js project with package.json
 
 The development environment uses Node.js, although the project is for web browser. We need to setup the project folder with an npm—Node.js Package Manager. We can execute `npm init` and following the steps to generate a `package.json` file in the project directory.
 
