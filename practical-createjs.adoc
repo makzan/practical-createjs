@@ -1,6 +1,6 @@
 = Practical CreateJS
 Makzan <mak@makzan.net>
-v2.0, October 10, 2015: AsciiDoc Rewrite
+v2.0, October 14, 2015: AsciiDoc Rewrite
 :doctype: book
 :docinfo:
 :toc: left
@@ -9,6 +9,8 @@ v2.0, October 10, 2015: AsciiDoc Rewrite
 :linkcss:
 :source-highlighter: highlightjs
 :front-cover-image: image:book/cover.png[width=2550,height=3300]
+:imagesdir: images
+:username: makzan
 
 A short book about using CreateJS.
 

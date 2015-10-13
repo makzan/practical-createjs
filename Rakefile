@@ -38,7 +38,7 @@ namespace :book do
     puts " -- HTML output at output/practical-createjs.html"
 
     puts "Converting to EPub..."
-    `bundle exec asciidoctor-epub3 -D output practical-createjs.adoc`
+    `bundle exec asciidoctor-epub3 -a source-highlighter=coderay -D output practical-createjs.adoc`
     puts " -- Epub output at output/practical-createjs.epub"
 
     puts "Converting to Mobi (kf8)..."
