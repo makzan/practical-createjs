@@ -7,7 +7,7 @@ http://mak.la/cjs-proj1.zip
 
 After you downloaded the file, you will see the following files in the bundle.
 
-image:project-1-assets.png[PNG files for project 1]
+image::project-1-assets.png[PNG files for project 1]
 
 ----
 images/

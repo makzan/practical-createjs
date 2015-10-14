@@ -5,7 +5,7 @@ In this project, we create an app that helps the user knows if they need to begi
 
 Before we get started into the project, here is the screenshot of what we are going to build. You can also try the project demo with the following link. I recommend you go try it so you can map the code with the app that we are building.
 
-image:rain-or-not-screenshot.png[Screenshot of the app example]
+image::rain-or-not-screenshot.png[Screenshot of the app example]
 
 http://mak.la/demo-rain-or-not
 

@@ -2,7 +2,7 @@
 = Project 1—Basic app with animated transitions
 In this project, we are going to build a designer portfolio. There is stylish navigation menu, animated transitions and static photos viewer.
 
-image:project-1-screenshot.png[Screenshot of the app example]
+image::project-1-screenshot.png[Screenshot of the app example]
 
 I have recorded a video of the app example that shows the animated transition. You may take a look to have a better understandings on what we are building.
 

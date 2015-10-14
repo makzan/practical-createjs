@@ -32,7 +32,7 @@ Drawing chart is one of the common canvas usage.
 
 We have discussed the usage of gyroscope sensor in the chapter _Rain or Not_. What if combine what I have learned there with the chart drawing together? Try creating an inspector as following that shows the value history of the sensor.
 
-image:rotation-inspector.png[Rotation Inspector]
+image::rotation-inspector.png[Rotation Inspector]
 
 You can test the real application by using the following links with your devices.
 
@@ -41,4 +41,4 @@ You can test the real application by using the following links with your devices
 
 The rotation value ranged from -365 to +365. When we use the following chart, the rotation value shows as a history for better inspection.
 
-image:rotation-chart-explain.jpg[Chart explanation]
+image::rotation-chart-explain.jpg[Chart explanation]
