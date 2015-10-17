@@ -5,22 +5,22 @@ In this project, we improve the *Project 1* to make all the content accessible b
 
 
 :sectnums!:
-include::mission-checklist.adoc[]
+include::sections/mission-checklist.adoc[]
 
-include::project-preparation.adoc[]
+include::sections/project-preparation.adoc[]
 
 :sectnums:
-include::step1.adoc[]
+include::sections/step1.adoc[]
 
-include::step2.adoc[]
+include::sections/step2.adoc[]
 
-include::step3.adoc[]
+include::sections/step3.adoc[]
 
-include::step4.adoc[]
+include::sections/step4.adoc[]
 
-include::step5.adoc[]
+include::sections/step5.adoc[]
 
-include::step6.adoc[]
+include::sections/step6.adoc[]
 
 
 // :sectnums!:
