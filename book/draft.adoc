@@ -14,3 +14,27 @@ Why still Adobe Flash?
 project 5:
 
 Photo Gallery
+
+
+
+Exporting shape from flash
+
+After draw the shape, make the complex shape as a movie clip symbol. Give it a name. Then you can either use it by creating a new instance or using its instance name directly if it is already on the stage.
+
+
+Why flash?
+
+Flash is dead as a player. But it is still a very good authoring tool to create vector animation.
+
+I believe we have a lot to learn from the workflow of flash authoring.
+
+It's symbol. Hierarchy. Instance. Tweening.
+
+
+
+
+DrawScript
+
+http://drawscri.pt
+
+Allow drawing the vector in Adobe Illustrator and exporting the shape into EaselJS shape drawing.

@@ -156,11 +156,6 @@ class App
   constructor: ->
     ...
 
-    leanpub-start-delete
-    sceneA = new SceneA()
-    @stage.addChild sceneA
-    leanpub-end-delete
-
     sceneManager.stage = @stage
 
     scene = new SceneA()

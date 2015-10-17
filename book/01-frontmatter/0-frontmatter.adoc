@@ -1,6 +1,0 @@
-:sectnums!:
-= Frontmatter
-
-include::about-author.adoc[]
-
-include::preface.adoc[]

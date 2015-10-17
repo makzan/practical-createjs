@@ -4,18 +4,18 @@
 In this project, we modify previous chapter to draw different types of chart by using the canvas tag and CreateJS library. We will also animate the chart by using the TweenJS, which is part of the CreateJS suite.
 
 :sectnums!:
-include::mission-checklist.adoc[]
+include::sections/mission-checklist.adoc[]
 
-include::project-preparation.adoc[]
+include::sections/project-preparation.adoc[]
 
 :sectnums:
-include::step1.adoc[]
+include::sections/step1.adoc[]
 
-include::step2.adoc[]
+include::sections/step2.adoc[]
 
-include::step3.adoc[]
+include::sections/step3.adoc[]
 
-include::step4.adoc[]
+include::sections/step4.adoc[]
 
 
 

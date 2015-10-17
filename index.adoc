@@ -24,12 +24,12 @@ Buy the book at {leanpub}[LeanPub].
 Read link:practical-createjs.html[One Page version].
 
 === Read by Chapters
-- link:0-frontmatter.html[Frontmatter]
-- link:0-preparation.html[Preparation]
-- link:0-project1.html[Project 1]
-- link:0-project1b.html[Project 1B]
-- link:0-project2.html[Project 2]
-- link:0-project3.html[Project 3]
-- link:0-project4.html[Project 4]
-- link:0-project4b.html[Project 4B]
-- link:0-backmatter.html[Backmatter]
+- link:frontmatter.html[Frontmatter]
+- link:preparation.html[Preparation]
+- link:project1.html[Project 1]
+- link:project1b.html[Project 1B]
+- link:project2.html[Project 2]
+- link:project3.html[Project 3]
+- link:project4.html[Project 4]
+- link:project4b.html[Project 4B]
+- link:backmatter.html[Backmatter]

@@ -6,6 +6,7 @@ Let’s follow the steps to define a `Scene` class.
 
 1. We create a dedicated file for the scenes definition. Add the following code to the `scenes.coffee`.
 +
+.scenes.coffee
 [source,coffeescript]
 ----
 # a global app object.
@@ -36,6 +37,7 @@ this.exampleApp.Scene = Scene
 
 2. In the `app.coffee`, we create the Scene instance and add it to the stage. This is a testing scene, we are going to change it to the real scene in next step.
 +
+.app.coffee
 [source,coffeescript]
 ----
 Scene = this.exampleApp.Scene
@@ -50,6 +52,7 @@ class App
 
 3. We have created a new file `scenes.coffee`, we need to include it into the GulpJS pipeline. Add the file into the `gulp.src` array.
 +
+.gulp.coffee
 [source,coffeescript]
 ----
 gulp.task 'js', ->

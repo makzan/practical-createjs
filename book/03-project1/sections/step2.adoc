@@ -19,6 +19,7 @@ Let’s follow the following steps to setup our canvas and CreateJS library.
 
 1. In the `index.html`, we prepare the basic HTML structure.
 +
+.index.html
 [source,html]
 ----
 include::code/code-1.2.index.html[]
@@ -26,6 +27,7 @@ include::code/code-1.2.index.html[]
 
 2. We have minimal styling in this task because our focus is on the canvas element. Add the following CSS to the `styles/app.css` file.
 +
+.app.css
 [source,css]
 ----
 include::code/code-1.2.app.css[]
@@ -33,6 +35,7 @@ include::code/code-1.2.app.css[]
 
 3. We created a file named `setting.coffee` which holds our global app configuration variables. Add the following width and height setting to the file.
 +
+.setting.coffee
 [source,coffeescript]
 ----
 include::code/code-1.2.setting.coffee[]
@@ -40,6 +43,7 @@ include::code/code-1.2.setting.coffee[]
 
 4. Then we create the entry point of our app in the `app.coffee`. Add the following code to the file.
 +
+.app.coffee
 [source,coffeescript]
 ----
 include::code/code-1.2.app.coffee[]

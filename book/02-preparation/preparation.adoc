@@ -1,0 +1,21 @@
+:sectnums!:
+= Preparation
+:imagesdir: images
+
+In this part, we setup our environment and get ready for getting our hand dirty to code the example project.
+
+include::sections/prerequest.adoc[]
+
+include::sections/html-and-css.adoc[]
+
+include::sections/javascript.adoc[]
+
+include::sections/coffeescript.adoc[]
+
+include::sections/compiling-coffeescript.adoc[]
+
+include::sections/tools.adoc[]
+
+include::sections/why-createjs.adoc[]
+
+include::sections/example-projects.adoc[]

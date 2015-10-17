@@ -16,24 +16,24 @@ We have created an information based app in last example. In this example, we wi
 We try to separate the logic, data and the view. This ensues that each module of code is minimal and so they are easy to maintain.
 
 :sectnums!:
-include::mission-checklist.adoc[]
+include::sections/mission-checklist.adoc[]
 
 :sectnums:
-include::step1.adoc[]
+include::sections/step1.adoc[]
 
-include::step2.adoc[]
+include::sections/step2.adoc[]
 
-include::step3.adoc[]
+include::sections/step3.adoc[]
 
-include::step4.adoc[]
+include::sections/step4.adoc[]
 
-include::step5.adoc[]
+include::sections/step5.adoc[]
 
-include::step6.adoc[]
+include::sections/step6.adoc[]
 
-include::step7.adoc[]
+include::sections/step7.adoc[]
 
-include::step8.adoc[]
+include::sections/step8.adoc[]
 
 :sectnums!:
 

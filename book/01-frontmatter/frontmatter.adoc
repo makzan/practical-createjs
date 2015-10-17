@@ -1,0 +1,7 @@
+:sectnums!:
+= Frontmatter
+:imagesdir: images
+
+include::sections/about-author.adoc[]
+
+include::sections/preface.adoc[]
