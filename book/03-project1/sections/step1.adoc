@@ -17,7 +17,7 @@ automation setup.
 following is the initial file structure setup.
 +
 ----
-include::code/code-1.1.1.txt[]
+include::../code/code-1.1.1.txt[]
 ----
 
 2.  We can generate the `package.json` file via the `npm init` method.
@@ -34,7 +34,7 @@ the `package.json` file. Check if you get similar result.
 +
 [source,json]
 ----
-include::code/code-1.1.package.json[]
+include::../code/code-1.1.package.json[]
 ----
 
 4.  Gulp always looks for the `Gulpfile.js` file when we execute the
@@ -44,7 +44,7 @@ include the `.coffee` version of the GulpFile.
 +
 [source,javascript]
 ----
-include::code/code-1.1.gulp.js[]
+include::../code/code-1.1.gulp.js[]
 ----
 
 5.  Now we can write our Gulp pipeline in CoffeeScript. The following
@@ -54,7 +54,7 @@ and go through the `js` task automatically.
 +
 [source,coffeescript]
 ----
-include::code/code-1.1.gulp.coffee[]
+include::../code/code-1.1.gulp.coffee[]
 ----
 
 6.  We create 2 CoffeeScript files to see if our `Gulpfile` works. They
@@ -63,12 +63,12 @@ these files in next step.
 +
 [source,coffeescript]
 ----
-include::code/code-1.1.app.coffee[]
+include::../code/code-1.1.app.coffee[]
 ----
 +
 [source,coffeescript]
 ----
-include::code/code-1.1.setting.coffee[]
+include::../code/code-1.1.setting.coffee[]
 ----
 7.  Now we can run `gulp` in the terminal:
 +
@@ -79,7 +79,7 @@ $ ./node_modules/.bin/gulp
 +
 [source,javascript]
 ----
-include::code/code-1.1.app.js[]
+include::../code/code-1.1.app.js[]
 ----
 
 If you get the same result, that means our setup works.
